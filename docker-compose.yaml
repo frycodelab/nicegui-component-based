@@ -1,0 +1,13 @@
+services:
+  nicegui:
+    image: template-dss:latest
+    build:
+      context: .
+    ports:
+      - 8080:8080
+    volumes:
+      - ./app:/app # mounting local app directory
+    environment:
+      - PUID=1000 # change this to your user id
+      - PGID=1000 # change this to your group id
+      - STORAGE_SECRET="change-this-to-yor-own-private-secret"
