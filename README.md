@@ -168,5 +168,5 @@ As the project became larger and more complex - it was a necessity to make it mo
 
 ## Demo
 
-[Demo based on dockerized build]("https://nicegui-template-black-sun-7413.fly.dev/").
+[Demo based on dockerized app](https://nicegui-template-black-sun-7413.fly.dev/).
 
