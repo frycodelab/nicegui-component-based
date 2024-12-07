@@ -1,9 +1,3 @@
-docker save -o <path for generated tar file> <image name>
-docker load -i <path to image tar file>
-
-docker save -o /home/matrix/matrix-data.tar matrix-data
-docker load -i <path to copied image file>
-
 #Build
 # Use the official NiceGUI image as the base image
 FROM zauberzeug/nicegui:latest
@@ -22,6 +16,15 @@ CMD ["python", "main.py"]
 
 docker build -t custom-nicegui .
 docker run -d --name nicegui_app -p 8080:8080 -v $(pwd)/app:/app custom-nicegui
+
+#Save
+# Save NiceGUI image as the base image
+docker save -o <path for generated tar file> <image name>
+docker load -i <path to image tar file>
+
+docker save -o /home/matrix/matrix-data.tar matrix-data
+docker load -i <path to copied image file>
+
 
 #Compose
 services:
