@@ -1,12 +1,11 @@
 
+
 # Component based NiceGUI template 
 
-This is a template based on NiceGUI, a fully python based framwork for web/native development. Yout can use plain HTML/CSS/JavaScript or components from the NiceGUI libary itself - they are mostly build with Quasar.
+This is a template based on **NiceGUI**, a fully python based framwork for web/native development. Yout can use plain HTML/CSS/JavaScript or your own components from the NiceGUI libary itself - they are build with **Quasar**.
 
 Goal of this template is to modularize the way a project is set up/ worked on.
-The main aim is to make it easy for beginners/or advanced developers to start off relatively fast.
-
-
+The main aim is to make it easy for beginners/or advanced developers to start off relatively fast and make the code **more readable/maintainable**.
 
 
 ## Project structure
@@ -14,12 +13,13 @@ The main aim is to make it easy for beginners/or advanced developers to start of
 ```javascript
 
 nicegui-template/
+├─ README.md
 ├─ .gitignore
 ├─ Dockerfile
-├─ docker-compose.yaml
-├─ README.md
 ├─ requirements.txt
+├─ docker-compose.yaml
 ├─ app/
+│  ├─ config.json
 │  ├─ main.py
 │  ├─ header.py
 │  ├─ footer.py
@@ -38,83 +38,93 @@ nicegui-template/
 
 ## Requirements
 
-- [python]()
-- [pip]()
+- [python](https://www.python.org/downloads/)
+- [pip](https://phoenixnap.com/kb/install-pip-windows)
 
 
 ## Installation
 
 - Clone the project first - unzip and open folder with VS Code
-- Open new terminal powershell/cmd/git-bash
+- Open new terminal **powershell/cmd/git-bash**
 
-```bash
-  cd path/to/project
-  python -m venv venv
-  venv/bin/activate
-  pip install nicegui
-  pip install pyinstaller
-  pip install -r requirements.txt
-  cd app/
-```
+    ```bash
+    cd path/to/project
+    python -m venv venv
+    venv/bin/activate
+    pip install nicegui
+    pip install pyinstaller
+    pip install -r requirements.txt
+    cd app/
+    ```
     
 ## Deployment/Testing
 
-To run this project run within ./app folder
 
-```bash
-  python ./main.py
-```
+- To run this project run **within ./app** folder
 
-- Option within main.py - use only one/uncomment others
+    ```bash
+    cd app/
+    python ./main.py
+    ```
 
-```bash
-  #For dev
-  ui.run(storage_secret="myStorageSecret",title=appName,port=appPort,favicon='🚀')
+- To change name, version or port for the application - adjust `app/config.json`
 
-  #For prod
-  ui.run(storage_secret="myStorageSecret",title=appName,port=appPort,favicon='🚀')
+    ```json
+    {
+        "appName" : "App-Template",
+        "appVersion" : "Preview",
+        "appPort" : 3000
+    }
+    ```
 
-  #For native
-  ui.run(storage_secret="myStorageSecret",title=appName,port=appPort,favicon='🚀',     reload=False, native=True, window_size=(1600,900))
+    To change the logo simply replace the logo.png in `app/assets/images/logo.png`
 
-  #For Docker
-  ui.run(storage_secret=os.environ['STORAGE_SECRET'])
-```
+- Option within `main.py` - **use only one/uncomment others**
 
-- For  **Docker** adjust main.py 
+    ```python
+    #For dev
+    ui.run(storage_secret="myStorageSecret",title=appName,port=appPort,favicon='🚀')
 
-```bash
-  #For Docker
-  ui.run(storage_secret=os.environ['STORAGE_SECRET'])
+    #For prod only web
+    ui.run(storage_secret="myStorageSecret",title=appName,port=appPort,favicon='🚀')
 
-```
+    #For native as desktop app
+    ui.run(storage_secret="myStorageSecret",title=appName,port=appPort,favicon='🚀',     reload=False, native=True, window_size=(1600,900))
 
-- Go on folder back whre the docker-compose.yaml is located
+    #For Docker image/container
+    ui.run(storage_secret=os.environ['STORAGE_SECRET'])
+    ```
 
-```bash
-  cd ..
-  docker compose up
+- For **Docker** adjust `main.py` and use
 
-```
+    ```bash
+        #For Docker
+        ui.run(storage_secret=os.environ['STORAGE_SECRET'])
+    ```
 
-Your container should build an image template:latest and run the container on localhost:8080 
+    Go one folder back in terminal where the **docker-compose.yaml** is located
+
+    ```bash
+        cd ..
+        docker compose up
+    ```
+
+Your container should build an image template:latest and run the container on http://localhost:8080.
 
 
+## Acknowledgements/Learnings
 
-## Acknowledgements
+- Add local assets to server - add in `main.py`
 
-- Add local assets to server - add in main.py
+    ```python
+    app.add_static_files("/the-folder-name-you-want-to have-on-server","local-folder-you-want-to-add")
+    ```
 
-  ```
-  app.add_static_files('/the-folder-name-you-want-to have-on-server', "local-folder-you-want-to-add")
-
-  ```
-
-- Global styling in /app/css/global-css.css
+- Global styling in `/app/css/global-css.css`
 
   You can add a global styling to the quasar elements with css.
 
-  ```
+  ```css
   .q-tooltip{
     font-size:2rem;
   }
@@ -130,7 +140,7 @@ Your container should build an image template:latest and run the container on lo
 
   You can change the properties from all elements that with simply adding .props()
 
-  ```
+  ```python
   ui.input("").props("outline")
   ui.button("").props("flat")
 
@@ -140,31 +150,77 @@ Your container should build an image template:latest and run the container on lo
 
 ## Publishing es .exe
 
-**Make sure reload=False in ui.run()!**
+**Make sure reload=False is in ui.run()!**
 
-Got to /app folder in terminal
+- Got to /app folder in terminal
 
-```bash
-nicegui-pack --onefile --name "myapp" main.py
-```
+    ```bash
+    nicegui-pack --onefile --name "myapp" main.py
+    ```
 
 You can have a look at the full documentation [here]("https://nicegui.io/documentation/section_configuration_deployment").
 
 
 
-
-
 ## Optimizations
 
-As the project became larger and more complex - it was a necessity to make it more readable/maintainable.
+We took Node.js/Next.js frameworks like Angular/React/Svelte etc. as blueprint and modularized the header/footer/router-outlet.
+As the projects became larger and more complex - it was a necessity to do so, to make it more readable/maintainable.
 
+The main idea is to split/modularize components that can be reused.
+So the header/footer are beeing reused, every single component has it own .py file in **/app/components** and you reuse them as often as you wish.
 
+- Example below in `main.py`:
+
+    ```python
+    #Import all components
+    import components.page_name_1
+    import components.page_name_2
+    #Some other imports ....
+
+    #Some initializing code.....
+
+    @ui.page('/')
+    def index():
+
+        #Define main colors for page/subcomponents and add css
+        ui.colors(primary='#28323C', secondary="#B4C3AA", positive='#53B689', accent='#111B1E')
+        ui.add_head_html("<style>" + open(Path(__file__).parent / "assets" / "css" / "global-css.css").read() + "</style>")
+
+        with header.frame(title=appName, version=appVersion):
+
+            #Your page content from components.page_name_1.content()
+            components.page_name_1()
+
+            footer.frame(title=appName, version=appVersion)
+
+    @ui.page('/second')
+    def index():
+
+        #Define main colors for page/subcomponents and add css
+        ui.colors(primary='#28323C', secondary="#B4C3AA", positive='#53B689', accent='#111B1E')
+        ui.add_head_html("<style>" + open(Path(__file__).parent / "assets" / "css" / "global-css.css").read() + "</style>")
+
+        with header.frame(title=appName, version=appVersion):
+
+            #Your page content from components.page_name_2()
+
+            components.page_name_2.content()
+
+            footer.frame(title=appName, version=appVersion)
+
+    #Some more code ...
+
+    ```
 
 
 ## Authors
 
 - [@frycodelab](https://frycode-lab.com)
 
+## Feedback
+
+If you have any feedback, please reach out to us at frycodelab@gmail.com
 
 ## Demo
 
