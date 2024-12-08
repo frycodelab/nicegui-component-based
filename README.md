@@ -47,7 +47,7 @@ nicegui-template/
 ## Installation
 
 - Clone the project first - unzip and open folder with VS Code
-- Open new terminal **powershell/cmd/git-bash**
+- Open new terminal **powershell/cmd/git-bash**:
 
     ```bash
     cd path/to/project
@@ -62,14 +62,14 @@ nicegui-template/
 ## Deployment/Testing
 
 
-- To run this project run **within ./app** folder
+- To run this project run **within ./app** folder:
 
     ```bash
     cd app/
     python ./main.py
     ```
 
-- To change name, version or port for the application - adjust `app/config.json`
+- To change name, version or port for the application - adjust `app/config.json`:
 
     ```json
     {
@@ -79,9 +79,9 @@ nicegui-template/
     }
     ```
 
-    To change the logo simply replace the logo.png in `app/assets/images/logo.png`
+    To change the logo simply replace the logo.png in `app/assets/images/logo.png`.
 
-- Option within `main.py` - **use only one/uncomment others**
+- Option within `main.py` - **use only one/uncomment others**:
 
     ```python
     #For dev
@@ -97,14 +97,14 @@ nicegui-template/
     ui.run(storage_secret=os.environ['STORAGE_SECRET'])
     ```
 
-- For **Docker** adjust `main.py` and use
+- For **Docker** adjust `main.py` and use:
 
     ```bash
         #For Docker
         ui.run(storage_secret=os.environ['STORAGE_SECRET'])
     ```
 
-    Go one folder back in terminal where the **docker-compose.yaml** is located
+    Go one folder back in terminal where the **docker-compose.yaml** is located:
 
     ```bash
         cd ..
@@ -116,15 +116,15 @@ Your container should build an image template:latest and run the container on ht
 
 ## Acknowledgements/Learnings
 
-- Add local assets to server - add in `main.py`
+- Add local assets to server - add in `main.py`:
 
     ```python
     app.add_static_files("/the-folder-name-you-want-to have-on-server","local-folder-you-want-to-add")
     ```
 
-- Global styling in `/app/css/global-css.css`
+- Global styling in `/app/css/global-css.css`:
 
-  You can add a global styling to the quasar elements with css.
+  You can add a global styling to the quasar elements with css:
 
   ```css
   .q-tooltip{
@@ -138,7 +138,7 @@ Your container should build an image template:latest and run the container on ht
 
   You can look up the quasar classes in the browser dev-console.
 
-- Changing .props of ui.elements()
+- Changing **.props** of **ui.elements()**:
 
   You can change the properties from all elements that with simply adding .props()
 
@@ -150,7 +150,7 @@ Your container should build an image template:latest and run the container on ht
 
   The props for the different elements are documented in [Quasar]("https://quasar.dev/vue-components/input#input-types").
 
-- Changing .style of single ui.elements()
+- Changing **.style** of single **ui.elements()**
 
   You can change the style from all elements that with simply adding .style()
 
@@ -166,7 +166,7 @@ Your container should build an image template:latest and run the container on ht
 
 **Make sure reload=False is in ui.run()!**
 
-- Got to /app folder in terminal
+- Got to /app folder in terminal:
 
     `--onefile` procedure:
 
@@ -184,7 +184,7 @@ Your container should build an image template:latest and run the container on ht
     Plus the startup time, especially for native apps is significantlly **faster**. That because the `--onefile` has to exctract all dependencies first, 
     \
     whereas the `--onedir` has everything unpacked.
-You can have a look at the full documentation [here]("https://nicegui.io/documentation/section_configuration_deployment").
+You can have a look at the full documentation [here](https://nicegui.io/documentation/section_configuration_deployment).
 
 
 
