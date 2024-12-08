@@ -1,18 +1,12 @@
 
-![Logo](/FRYCODE_LAB.png)
-
-me me me 
-<div style="align:right;">
-    <img src="/FRYCODE_LAB.png">
-</div>
 
 <img align="left" src="/FRYCODE_LAB.png">
 
-some text aligned to the right of the image
-
+We are focused on developing custom software solutions for dofferent purposes.
+This template is the result of the learning curve we had developing many applications.
+We want to share this with the community - to help NiceGUI becomming bigger.
 <br clear="left"/>
 
-and some text that is below the image (without an obnoxious number of <br /> tags).
 
 
 # Component based NiceGUI template 
