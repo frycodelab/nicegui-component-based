@@ -2,8 +2,6 @@
 
 # Component based NiceGUI template 
 
-![Logo|100](/FRYCODE_LAB.png|100)
-
 This is a template based on **NiceGUI, a fully python based framwork for web/native development**.
 \
 You can use plain HTML/CSS/JavaScript or your own components from the NiceGUI libary itself - they are build with **Quasar**.
