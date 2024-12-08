@@ -2,7 +2,7 @@
 ![Logo](/FRYCODE_LAB.png)
 
 <div style="text-align: center;">
-    <img width="100%" src="/FRYCODE_LAB.png">
+    <img src="/FRYCODE_LAB.png">
 </div>
 
 # Component based NiceGUI template 
