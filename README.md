@@ -1,6 +1,10 @@
 
 ![Logo](/FRYCODE_LAB.png)
 
+<div style="text-align: center;">
+    <img width="100%" src="/FRYCODE_LAB.png">
+</div>
+
 # Component based NiceGUI template 
 
 This is a template based on **NiceGUI, a fully python based framwork for web/native development**.
