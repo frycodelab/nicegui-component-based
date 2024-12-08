@@ -6,6 +6,14 @@ me me me
     <img src="/FRYCODE_LAB.png">
 </div>
 
+<img align="left" src="/FRYCODE_LAB.png">
+
+some text aligned to the right of the image
+
+<br clear="left"/>
+
+and some text that is below the image (without an obnoxious number of <br /> tags).
+
 
 # Component based NiceGUI template 
 
