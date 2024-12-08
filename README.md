@@ -4,7 +4,7 @@
 
 We are focused on developing custom software solutions for different purposes.
 This template is the result of the learning curve we had developing many applications.
-We want to share it with the community - to help NiceGUI becomming bigger. A big thank to @zauberzeug/niceGUI for this amazing framework.
+We want to share it with the community - to help NiceGUI becomming bigger. A big thank you to @zauberzeug/niceGUI for this amazing framework.
 <br clear="left"/>
 
 
