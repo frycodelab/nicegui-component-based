@@ -9,6 +9,8 @@ You can use plain HTML/CSS/JavaScript or your own components from the NiceGUI li
 Goal of this template is to modularize the way a project is set up/ worked on.
 The main aim is to make it easy for beginners/or advanced developers to start off relatively fast and make the code **more readable/maintainable**.
 
+![App Screenshot](/FRYCODE_LAB.png)
+
 ## Requirements
 
 **All you need is:**
