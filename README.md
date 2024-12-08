@@ -2,7 +2,7 @@
 
 # Component based NiceGUI template 
 
-![Logo|100](/FRYCODE_LAB.png)
+![Logo|100](/FRYCODE_LAB.png|100)
 
 This is a template based on **NiceGUI, a fully python based framwork for web/native development**.
 \
