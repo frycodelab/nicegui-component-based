@@ -184,9 +184,7 @@ Your container should build an image template:latest and run the container on ht
     Plus the startup time, especially for native apps is significantlly **faster**. That because the `--onefile` has to exctract all dependencies first, 
     \
     whereas the `--onedir` has everything unpacked.
-You can have a look at the full documentation [here]("https://nicegui.io/documentation/section_configuration_deployment").
-
-
+You can have a look at the full documentation [here](https://nicegui.io/documentation/section_configuration_deployment).
 
 ## Optimizations
 
