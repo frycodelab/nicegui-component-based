@@ -1,4 +1,5 @@
 
+![Logo](/FRYCODE_LAB.PNG)
 
 # Component based NiceGUI template 
 
