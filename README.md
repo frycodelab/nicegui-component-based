@@ -2,11 +2,19 @@
 
 # Component based NiceGUI template 
 
-This is a template based on **NiceGUI**, a fully python based framwork for web/native development. Yout can use plain HTML/CSS/JavaScript or your own components from the NiceGUI libary itself - they are build with **Quasar**.
+This is a template based on **NiceGUI, a fully python based framwork for web/native development**.
+\
+You can use plain HTML/CSS/JavaScript or your own components from the NiceGUI libary itself - they are build with **Quasar**.
 
 Goal of this template is to modularize the way a project is set up/ worked on.
 The main aim is to make it easy for beginners/or advanced developers to start off relatively fast and make the code **more readable/maintainable**.
 
+## Requirements
+
+**All you need is:**
+
+- [python](https://www.python.org/downloads/)
+- [pip](https://phoenixnap.com/kb/install-pip-windows)
 
 ## Project structure
 
@@ -34,12 +42,6 @@ nicegui-template/
 │  │  │  ├─ logo.png
 
 ```
-
-
-## Requirements
-
-- [python](https://www.python.org/downloads/)
-- [pip](https://phoenixnap.com/kb/install-pip-windows)
 
 
 ## Installation
@@ -148,16 +150,40 @@ Your container should build an image template:latest and run the container on ht
 
   The props for the different elements are documented in [Quasar]("https://quasar.dev/vue-components/input#input-types").
 
+- Changing .style of single ui.elements()
+
+  You can change the style from all elements that with simply adding .style()
+
+  ```python
+  ui.input("").style("font-size:2rem")
+  ui.button("").style("color:red")
+
+  ```
+
+    Stylesheet language .css  is beeing used.
+
 ## Publishing es .exe
 
 **Make sure reload=False is in ui.run()!**
 
 - Got to /app folder in terminal
 
+    `--onefile` procedure:
+
     ```bash
     nicegui-pack --onefile --name "myapp" main.py
     ```
 
+    `--onedir` procedure:
+    ```
+    python -m PyInstaller --name 'Appname' --onedir main.py --add-data 'C:your\path\to\venv\lib\site-packages\nicegui;nicegui' --noconfirm --clean --add-data "xc.ico;." --icon="xc.ico"
+    ```
+
+    The `--onedir` direct pyinstaller call is more complex, but more **tweakable**.
+    \
+    Plus the startup time, especially for native apps is significantlly **faster**. That because the `--onefile` has to exctract all dependencies first, 
+    \
+    whereas the `--onedir` has everything unpacked.
 You can have a look at the full documentation [here]("https://nicegui.io/documentation/section_configuration_deployment").
 
 
@@ -220,7 +246,7 @@ So the header/footer are beeing reused, every single component has it own .py fi
 
 ## Feedback
 
-If you have any feedback, please reach out to us at frycodelab@gmail.com
+If you have any feedback, please reach out to us at frycodelab@gmail.com.
 
 ## Demo
 
