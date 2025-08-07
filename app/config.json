@@ -1,5 +1,5 @@
 {
-    "appName" : "App-Template",
-    "appVersion" : "Preview",
-    "appPort" : 3000
+    "appName" : "Production Suite",
+    "appVersion" : "Beta 1.0",
+    "appPort" : 8080
 }

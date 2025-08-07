@@ -1,3 +1,207 @@
-.q-tooltip{
-    font-size: medium;
+/* Dropdown container */
+.account-dropdown {
+  font-family: 'Roboto', sans-serif;
+  min-width: 200px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+  padding: 24px 0 16px 0;
+  margin-top: 0px;
+}
+
+q-menu {
+  border-radius: 12px !important;
+  /* Additional styles for the menu can be added here */
+}
+/* User name / title */
+.account-dropdown .account-name {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #212121;
+  padding: 0 24px 12px 24px;
+  letter-spacing: 0.015em;
+}
+
+/* Separator line */
+.account-dropdown .account-separator {
+  border-top: 1px solid #e0e0e0;
+  margin: 0 24px 16px 24px;
+}
+
+/* Menu item */
+.account-menu-item {
+  display: flex;
+  align-items: center;
+  padding: 0px 24px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background-color 0.2s ease-in-out;
+  font-size: 1rem;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.account-menu-item:hover {
+  background-color: #f4f6fb;
+}
+
+/* Icon next to menu item */
+.account-menu-item .account-icon {
+  color: #1a73e8;
+  font-size: 1.4rem;
+  margin-right: 12px;
+}
+
+/* Logout item */
+.account-menu-item.logout {
+  color: #e53935;
+}
+
+.account-menu-item.logout:hover {
+  background-color: #ffeaea;
+}
+
+
+.google-like-button {
+  display: inline-block !important;
+  padding: 8px 30px !important;
+  border: none !important;
+  border-radius: 34px !important;
+  font-size: 14px !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s ease-in-out !important;
+  box-shadow: none !important;
+}
+
+
+.google-like-button.primary {
+  background-color: #4285f4 !important;
+  color: #fff !important;
+}
+
+.google-like-button.primary:hover {
+  background-color: #357aed !important;
+}
+
+.google-like-button.secondary {
+  background-color: #f44336 !important;
+  color: #fff !important;
+}
+
+.google-like-button.secondary:hover {
+  background-color: #d32f2f !important;
+}
+
+.google-like-button.tertiary {
+  background-color: #ffffff !important;
+  color: #4285f4 !important;
+  border: 1px solid grey !important;
+  padding: 7px 28px !important;
+}
+
+.google-like-button.tertiary:hover {
+  background-color: #d8d8d8 !important;
+}
+
+.google-like-button.disabled {
+  opacity: 0.5;
+  cursor: default !important;
+}
+
+@media (min-width: 600px) {
+  .q-dialog__inner--minimized>div {
+    max-width: none;
+  }
+}
+
+.google-print-button {
+  background-color: #f5f5f5;
+  /* Light gray background */
+  border: 1px solid #ccc;
+  /* Light gray border */
+  border-radius: 3px;
+  padding: 6px 10px;
+  cursor: pointer;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.google-print-button svg {
+  margin-right: 5px;
+  fill: #4285f4;
+  /* Google blue */
+}
+
+.container {
+  width: 610px;
+  margin: 5px auto;
+}
+
+.text-left {
+  font-size: 0.9rem !important;
+}
+
+.q-badge {
+  font-size: 1.0rem !important;
+}
+
+.greyscale-opacity {
+  filter: grayscale(0.5) opacity(0.4);
+}
+
+.q-info {
+  font-size: 1.0rem !important;
+  border-left: #357aed 5px solid !important;
+}
+
+.app-name {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 24px;
+  color: #333;
+  margin: 0;
+  padding-left: 6px;
+}
+
+/* Smooth sidebar transitions */
+.q-drawer {
+  transition: width 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) !important;
+}
+
+.sidebar-label {
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out !important;
+  transform-origin: left center;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  min-width: 0;
+}
+
+.sidebar-label.collapsed {
+  opacity: 0;
+  transform: translateX(-10px);
+  width: 0 !important;
+  min-width: 0 !important;
+}
+
+.sidebar-label.expanded {
+  opacity: 1;
+  transform: translateX(0);
+  width: auto;
+}
+
+/* Ensure row layout stability */
+.q-item__section {
+  align-items: center !important;
+}
+
+/* Prevent layout shifts during transitions */
+.sidebar-row {
+  min-height: 48px;
+  align-items: center;
+  display: flex !important;
+  flex-wrap: nowrap !important;
 }
