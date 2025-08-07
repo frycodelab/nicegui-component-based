@@ -1,3 +1,11 @@
+<img align="left" src="/FRYCODE_LAB.png">
+
+We are focused on developing custom software solutions for different purposes.
+This template is the result of the learning curve we had developing many applications.
+We want to share it with the community - to help NiceGUI becomming bigger. A big thank you to @zauberzeug/niceGUI for this amazing framework.
+<br clear="left"/>
+
+
 # NiceGUI Component-Based Boilerplate
 
 A modern, component-based NiceGUI application boilerplate with a responsive sidebar, header wrapper, and modular architecture. Built with `uv` for fast dependency management and featuring smooth animations, optimized performance, and a clean UI.
@@ -285,6 +293,22 @@ ui.run(storage_secret=os.environ['STORAGE_SECRET'],
        favicon='ico.ico', reconnect_timeout=20, reload=False)
 ```
 
+- For **Docker** adjust `main.py` and use:
+
+    ```bash
+        #For Docker
+        ui.run(storage_secret=os.environ['STORAGE_SECRET'])
+    ```
+
+    Go one folder back in terminal where the **docker-compose.yaml** is located:
+
+    ```bash
+        cd ..
+        docker compose up
+    ```
+
+Your container should build an image template:latest and run the container on http://localhost:8080.
+
 ### PyInstaller Build
 ```bash
 python -m PyInstaller --name 'YourApp' --onedir main.py --add-data 'venv/Lib/site-packages/nicegui;nicegui' --noconfirm --clean
@@ -366,3 +390,7 @@ For questions and support, please open an issue on GitHub.
 ---
 
 **Happy coding with NiceGUI! 🚀**
+
+## Authors
+
+- [@frycodelab](https://frycode-lab.com)

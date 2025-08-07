@@ -1,5 +1,3 @@
-
-
 <img align="left" src="/FRYCODE_LAB.png">
 
 We are focused on developing custom software solutions for different purposes.
@@ -8,105 +6,292 @@ We want to share it with the community - to help NiceGUI becomming bigger. A big
 <br clear="left"/>
 
 
+# NiceGUI Component-Based Boilerplate
 
-# Component based NiceGUI template 
+A modern, component-based NiceGUI application boilerplate with a responsive sidebar, header wrapper, and modular architecture. Built with `uv` for fast dependency management and featuring smooth animations, optimized performance, and a clean UI.
 
-This is a template based on **NiceGUI, a fully python based framwork for web/native development**.
-\
-You can use plain HTML/CSS/JavaScript or your own components from the NiceGUI libary itself - they are build with **Quasar**.
+![Python](https://img.shields.io/badge/python-v3.11+-blue.svg)
+![NiceGUI](https://img.shields.io/badge/NiceGUI-latest-green.svg)
+![UV](https://img.shields.io/badge/uv-package%20manager-orange.svg)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-Goal of this template is to modularize the way a project is set up/ worked on.
-The main aim is to make it easy for beginners/or advanced developers to start off relatively fast and make the code **more readable/maintainable**.
+## 🚀 Features
 
-![Logo](/Demo.PNG)
+### 🎨 UI/UX Features
+- **Responsive Collapsible Sidebar** with smooth animations
+- **Modern Header** with account dropdown menu
+- **Component-based Architecture** for maintainable code
+- **Print System** with Base64 support for documents/images
+- **Custom Styling** with Google-inspired button designs
+- **Logo Optimization** with lazy loading and preloading
+- **Smooth Transitions** and animations throughout the app
 
-## Requirements
+### 🏗️ Architecture Features
+- **Modular Component System** - Each page is a separate component
+- **Service Layer** - Helper functions organized in services directory
+- **Configuration-driven** - Centralized config management
+- **Route Wrapper System** - Consistent layout across all pages
+- **Asset Management** - Organized CSS, images, and static files
 
-**All you need is:**
+### ⚡ Performance Optimizations
+- **Logo Preloading** - Prevents flickering on page loads
+- **Global CSS Injection** - Optimized styling delivery
+- **Favicon Support** - Professional branding
+- **Static File Serving** - Efficient asset delivery
 
-- [python](https://www.python.org/downloads/)
-- [pip](https://phoenixnap.com/kb/install-pip-windows)
-
-## Project structure
-
-```javascript
-
-nicegui-template/
-├─ README.md
-├─ .gitignore
-├─ Dockerfile
-├─ requirements.txt
-├─ docker-compose.yaml
-├─ app/
-│  ├─ config.json
-│  ├─ main.py
-│  ├─ header.py
-│  ├─ footer.py
-│  ├─ components/
-│  │  ├─ home_content.py
-│  │  ├─ data_content.py
-│  │  ├─ controls_content.py
-│  ├─ assets/
-│  │  ├─ css/
-│  │  │  ├─ global-css.css
-│  │  ├─ images/
-│  │  │  ├─ logo.png
+## 📁 Project Structure
 
 ```
+nicegui-base-main/
+├── main.py                 # Main application entry point
+├── header.py               # Header component with sidebar
+├── footer.py               # Footer component (optional)
+├── pyproject.toml          # UV/Python project configuration
+├── uv.lock                 # UV lock file for reproducible builds
+├── ico.ico                 # Application favicon
+├── config.json             # Application configuration
+│
+├── assets/
+│   ├── css/
+│   │   ├── global-css.css  # Global application styles
+│   │   └── icons.css       # Tabler icons CSS
+│   └── images/
+│       ├── logo.png        # Application logo
+│       ├── extension_icon.png
+│       └── salzit.png
+│
+├── components/             # Page components
+│   ├── dashboard_content.py
+│   ├── shipping_content.py
+│   ├── production_content.py
+│   ├── orders_content.py
+│   ├── pallets_content.py
+│   ├── packings_content.py
+│   ├── data_content.py
+│   ├── settings_content.py
+│   └── print_component.py  # Special print functionality
+│
+└── services/               # Helper functions and utilities
+    ├── __init__.py
+    └── helpers.py
+```
 
+## 🛠️ Installation & Setup
 
-## Installation
+### Prerequisites
+- Python 3.11+
+- [UV Package Manager](https://github.com/astral-sh/uv)
 
-- Clone the project first - unzip and open folder with VS Code
-- Open new terminal **powershell/cmd/git-bash**:
+### Quick Start
 
-    ```bash
-    cd path/to/project
-    python -m venv venv
-    venv/bin/activate
-    pip install nicegui
-    pip install pyinstaller
-    pip install -r requirements.txt
-    cd app/
-    ```
-    
-## Deployment/Testing
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd nicegui-base-main
+   ```
 
+2. **Install dependencies with UV**
+   ```bash
+   uv sync
+   ```
 
-- To run this project run **within ./app** folder:
+3. **Create your configuration file**
+   ```json
+   {
+     "appName": "Your App Name",
+     "appVersion": "1.0.0",
+     "appPort": 8080
+   }
+   ```
 
-    ```bash
-    cd app/
-    python ./main.py
-    ```
+4. **Run the application**
+   ```bash
+   uv run python main.py
+   ```
 
-- To change name, version or port for the application - adjust `app/config.json`:
+## 🎯 Key Components
 
-    ```json
-    {
-        "appName" : "App-Template",
-        "appVersion" : "Preview",
-        "appPort" : 3000
-    }
-    ```
+### 📱 Main Application (`main.py`)
 
-    To change the logo simply replace the logo.png in `app/assets/images/logo.png`.
+The main application file sets up the core functionality:
 
-- Option within `main.py` - **use only one/uncomment others**:
+- **Base Layout Wrapper**: `with_base_layout` decorator that applies consistent styling and layout
+- **Route Definitions**: All application routes with their respective components
+- **Global Configurations**: Colors, CSS injection, and asset management
+- **Logo Optimization**: Global logo instance to prevent reloading
 
-    ```python
-    #For dev
-    ui.run(storage_secret="myStorageSecret",title=appName,port=appPort,favicon='🚀')
+```python
+# Logo optimization with global instance
+logo_image = None
 
-    #For prod only web
-    ui.run(storage_secret="myStorageSecret",title=appName,port=appPort,favicon='🚀')
+def get_logo_image():
+    global logo_image
+    if logo_image is None:
+        logo_image = ui.image('assets/images/logo.png').style('width: 5rem; height: auto;')
+    return logo_image
+```
 
-    #For native as desktop app
-    ui.run(storage_secret="myStorageSecret",title=appName,port=appPort,favicon='🚀',     reload=False, native=True, window_size=(1600,900))
+### 🎨 Header Component (`header.py`)
 
-    #For Docker image/container
-    ui.run(storage_secret=os.environ['STORAGE_SECRET'])
-    ```
+Features a sophisticated sidebar with smooth animations:
+
+- **Collapsible Sidebar** with width transitions (300px ↔ 100px)
+- **Label Animations** with fade-in/fade-out effects
+- **Active Route Highlighting** with visual indicators
+- **Account Dropdown** with modern styling
+- **Logo Integration** using CSS background for optimal performance
+
+**Animation System:**
+```python
+async def toggle_sidebar():
+    if app.storage.user['sidebar-collapsed']:
+        # Expanding: Width first, then labels
+        left_drawer.props("width=300")
+        await ui.run_javascript('new Promise(resolve => setTimeout(resolve, 50))')
+        for label in sidebar_labels:
+            label.classes(remove='collapsed', add='expanded')
+    else:
+        # Collapsing: Labels first, then width
+        for label in sidebar_labels:
+            label.classes(remove='expanded', add='collapsed')
+        await ui.run_javascript('new Promise(resolve => setTimeout(resolve, 50))')
+        left_drawer.props("width=100")
+```
+
+### 🖨️ Print System (`print_component.py`)
+
+Advanced printing functionality supporting various content types:
+
+- **Base64 Decoding** for encoded content
+- **Non-blocking Print** using invisible iframes
+- **Automatic Window Management** 
+- **Error Handling** for malformed data
+
+### 🎨 Global Styling (`global-css.css`)
+
+Comprehensive styling system featuring:
+
+#### Account Dropdown Styling
+```css
+.account-dropdown {
+  font-family: 'Roboto', sans-serif;
+  min-width: 200px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+  padding: 24px 0 16px 0;
+}
+```
+
+#### Google-Inspired Buttons
+```css
+.google-like-button {
+  padding: 8px 30px !important;
+  border-radius: 34px !important;
+  font-weight: bold !important;
+  transition: background-color 0.2s ease-in-out !important;
+}
+```
+
+#### Smooth Sidebar Transitions
+```css
+.sidebar-label {
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out !important;
+  transform-origin: left center;
+}
+
+.sidebar-label.collapsed {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+```
+
+## 🔧 Configuration
+
+### Application Config (`config.json`)
+```json
+{
+  "appName": "Your Application Name",
+  "appVersion": "1.0.0",
+  "appPort": 8080
+}
+```
+
+### UV Configuration (`pyproject.toml`)
+```toml
+[project]
+name = "nicegui-component-based"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "nicegui",
+    "nicegui[highcharts]",
+    "pyinstaller>=6.13.0",
+    "pywebview>=5.4",
+]
+```
+
+## 🎨 Customization
+
+### Adding New Components
+
+1. Create a new file in `components/`
+2. Implement a `content()` function
+3. Add route in `main.py`
+4. Update sidebar navigation in `header.py`
+
+**Example Component:**
+```python
+# components/new_component.py
+from nicegui import ui
+
+def content() -> None:
+    ui.label('New Component').style('font-size: 1.5rem;')
+    # Your component content here
+```
+
+### Styling Customization
+
+- **Colors**: Modify in `main.py` `ui.colors()` call
+- **CSS**: Add custom styles to `global-css.css`
+- **Icons**: Uses Tabler Icons via `icons.css`
+
+### Sidebar Navigation
+
+Add new menu items in `header.py`:
+```python
+with ui.link('', '/your-route').classes(f'w-full no-underline text-black {"bg-light-blue-3" if current_route.startswith("/your-route") else ""}'):
+    with ui.row().classes('items-center mb-2 mt-2 cursor-pointer w-full no-wrap'):
+        ui.icon('your_icon').classes('ml-5 text-2xl flex-shrink-0')
+        your_label = ui.label('Your Page').classes('text-lg sidebar-label ml-3 flex-shrink-0')
+        sidebar_labels.append(your_label)
+```
+
+## 🚀 Deployment Options
+
+### Development
+```bash
+uv run python main.py
+```
+
+### Production
+```python
+ui.run(host='0.0.0.0', storage_secret="your-secret", title=appName, 
+       port=appPort, favicon='ico.ico', reconnect_timeout=20, reload=False)
+```
+
+### Native Application
+```python
+ui.run(storage_secret="your-secret", title=appName, port=appPort, 
+       favicon='🧿', reload=False, native=True, window_size=(1600,900))
+```
+
+### Docker Deployment
+```python
+ui.run(storage_secret=os.environ['STORAGE_SECRET'], 
+       host=os.environ['HOST'], title=appName, port=appPort, 
+       favicon='ico.ico', reconnect_timeout=20, reload=False)
+```
 
 - For **Docker** adjust `main.py` and use:
 
@@ -124,140 +309,88 @@ nicegui-template/
 
 Your container should build an image template:latest and run the container on http://localhost:8080.
 
+### PyInstaller Build
+```bash
+python -m PyInstaller --name 'YourApp' --onedir main.py --add-data 'venv/Lib/site-packages/nicegui;nicegui' --noconfirm --clean
+```
 
-## Acknowledgements/Learnings
+## 🎯 Performance Features
 
-- Add local assets to server - add in `main.py`:
+### Logo Optimization
+- **Preloading**: `<link rel="preload" href="/assets/images/logo.png" as="image">`
+- **Global Instance**: Prevents reloading across page navigation
+- **CSS Background**: Better performance than `<img>` tags
 
-    ```python
-    app.add_static_files("/the-folder-name-you-want-to have-on-server","local-folder-you-want-to-add")
-    ```
+### Asset Management
+- **Static File Serving**: Efficient delivery via `app.add_static_files('/assets', "assets")`
+- **CSS Injection**: Inline styles for optimal loading
+- **Icon Fonts**: Tabler Icons for scalable iconography
 
-- Global styling in `/app/css/global-css.css`:
+### Animation Performance
+- **CSS Transitions**: Hardware-accelerated animations
+- **Strategic Delays**: Coordinated timing for smooth effects
+- **Class-based Management**: Efficient DOM manipulation
 
-  You can add a global styling to the quasar elements with css:
+## 🧩 Services Architecture
 
-  ```css
-  .q-tooltip{
-    font-size:2rem;
-  }
-  .q-input{
-    font-size:2rem;
-  }
+The `services/` directory contains reusable helper functions:
 
-  ```
+```python
+# services/helpers.py
+async def dummy_function():
+    return "Helper function called successfully!"
+```
 
-  You can look up the quasar classes in the browser dev-console.
+Import and use in components:
+```python
+import services.helpers as helpers
+result = await helpers.dummy_function()
+```
 
-- Changing **.props** of **ui.elements()**:
+## 📄 Print System Usage
 
-  You can change the properties from all elements that with simply adding .props()
+The print component supports Base64 encoded content:
 
-  ```python
-  ui.input("").props("outline")
-  ui.button("").props("flat")
+```python
+# Generate a print URL
+import base64
+content = "<h1>Hello World</h1>"
+encoded = base64.b64encode(content.encode()).decode()
+print_url = f"/print/{encoded}"
 
-  ```
+# Navigate to print
+ui.navigate.to(print_url)
+```
 
-  The props for the different elements are documented in [Quasar]("https://quasar.dev/vue-components/input#input-types").
+## 🤝 Contributing
 
-- Changing **.style** of single **ui.elements()**
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
 
-  You can change the style from all elements that with simply adding .style()
+## 📜 License
 
-  ```python
-  ui.input("").style("font-size:2rem")
-  ui.button("").style("color:red")
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-  ```
+## 🙏 Acknowledgments
 
-    Stylesheet language .css  is beeing used.
+- [NiceGUI](https://nicegui.io/) - The amazing Python web framework
+- [UV](https://github.com/astral-sh/uv) - Fast Python package manager
+- [Tabler Icons](https://tabler.io/icons) - Beautiful open-source icons
+- [Quasar Framework](https://quasar.dev/) - UI components underlying NiceGUI
 
-## Publishing es .exe
+## 📞 Support
 
-**Make sure reload=False is in ui.run()!**
+If you find this boilerplate helpful, please ⭐ star the repository!
 
-- Got to /app folder in terminal:
+For questions and support, please open an issue on GitHub.
 
-    `--onefile` procedure:
+---
 
-    ```bash
-    nicegui-pack --onefile --name "myapp" main.py
-    ```
-
-    `--onedir` procedure:
-    ```
-    python -m PyInstaller --name 'Appname' --onedir main.py --add-data 'C:your\path\to\venv\lib\site-packages\nicegui;nicegui' --noconfirm --clean --add-data "xc.ico;." --icon="xc.ico"
-    ```
-
-    The `--onedir` direct pyinstaller call is more complex, but more **tweakable**.
-    \
-    Plus the startup time, especially for native apps is significantlly **faster**. That because the `--onefile` has to exctract all dependencies first, 
-    \
-    whereas the `--onedir` has everything unpacked.
-You can have a look at the full documentation [here](https://nicegui.io/documentation/section_configuration_deployment).
-
-## Optimizations
-
-We took Node.js/Next.js frameworks like Angular/React/Svelte etc. as blueprint and modularized the header/footer/router-outlet.
-As the projects became larger and more complex - it was a necessity to do so, to make it more readable/maintainable.
-
-The main idea is to split/modularize components that can be reused.
-So the header/footer are beeing reused, every single component has it own .py file in **/app/components** and you reuse them as often as you wish.
-
-- Example below in `main.py`:
-
-    ```python
-    #Import all components
-    import components.page_name_1
-    import components.page_name_2
-    #Some other imports ....
-
-    #Some initializing code.....
-
-    @ui.page('/')
-    def index():
-
-        #Define main colors for page/subcomponents and add css
-        ui.colors(primary='#28323C', secondary="#B4C3AA", positive='#53B689', accent='#111B1E')
-        ui.add_head_html("<style>" + open(Path(__file__).parent / "assets" / "css" / "global-css.css").read() + "</style>")
-
-        with header.frame(title=appName, version=appVersion):
-
-            #Your page content from components.page_name_1.content()
-            components.page_name_1()
-
-            footer.frame(title=appName, version=appVersion)
-
-    @ui.page('/second')
-    def index():
-
-        #Define main colors for page/subcomponents and add css
-        ui.colors(primary='#28323C', secondary="#B4C3AA", positive='#53B689', accent='#111B1E')
-        ui.add_head_html("<style>" + open(Path(__file__).parent / "assets" / "css" / "global-css.css").read() + "</style>")
-
-        with header.frame(title=appName, version=appVersion):
-
-            #Your page content from components.page_name_2()
-
-            components.page_name_2.content()
-
-            footer.frame(title=appName, version=appVersion)
-
-    #Some more code ...
-
-    ```
-
+**Happy coding with NiceGUI! 🚀**
 
 ## Authors
 
 - [@frycodelab](https://frycode-lab.com)
-
-## Feedback
-
-If you have any feedback, please reach out to us at frycodelab@gmail.com.
-
-## Demo
-
-[Demo based on dockerized app](https://nicegui-template-black-sun-7413.fly.dev/).
-

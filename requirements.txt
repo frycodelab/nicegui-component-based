@@ -1,4 +1,0 @@
-nicegui
-pyinstaller
-pywebview
-nicegui[highcharts]
