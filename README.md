@@ -15,6 +15,8 @@ A modern, component-based NiceGUI application boilerplate with a responsive side
 ![UV](https://img.shields.io/badge/uv-package%20manager-orange.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
+<img align="center" src="/Demo.gif">
+
 ## 🚀 Features
 
 ### 🎨 UI/UX Features
