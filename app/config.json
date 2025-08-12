@@ -1,5 +1,10 @@
 {
     "appName" : "Production Suite",
     "appVersion" : "Beta 1.0",
-    "appPort" : 8080
+    "appPort" : 3000,
+    "google_oauth": {
+            "client_id": "244477491993-u5ahflsgmuibterql7ao0oo06ap7p6gf.apps.googleusercontent.com",
+            "client_secret": "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",
+            "redirect_uri": "http://localhost:3000/auth"
+    }
 }

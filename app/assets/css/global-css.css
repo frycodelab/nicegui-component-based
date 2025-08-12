@@ -205,3 +205,115 @@ q-menu {
   display: flex !important;
   flex-wrap: nowrap !important;
 }
+
+/* Plot Card Styles */
+.plot-card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  padding: 24px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+/* User Management Card Styles */
+.user-management-card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  padding: 24px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.user-management-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.user-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #e0e0e0;
+  transition: background-color 0.2s ease;
+}
+
+.user-list-item:hover {
+  background: #f0f2f5;
+}
+
+.user-badge {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.user-badge.admin {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.user-badge.user {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.form-section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+/* Enhanced form input styling */
+.user-form-input {
+  min-height: 56px !important;
+}
+
+.user-form-input .q-field__control {
+  min-height: 56px !important;
+}
+
+.user-form-input .q-field__native {
+  min-height: 40px !important;
+  padding: 12px 16px !important;
+  font-size: 1rem !important;
+}
+
+/* Dialog styling */
+.user-dialog {
+  border-radius: 12px !important;
+  max-width: 500px !important;
+}
+
+.dialog-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.dialog-content {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+.user-info-item {
+  background: #f8f9fa;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin: 8px 0;
+  border-left: 4px solid #4285f4;
+}

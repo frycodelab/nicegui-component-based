@@ -1,8 +1,8 @@
 from nicegui import ui, app
 
-def content(kundennummer) -> None:
+def content(customernumber) -> None:
 
-    error_label_c = ui.label(kundennummer).style('color: red;')
+    error_label_c = ui.label(customernumber).style('color: red;')
 
         
 

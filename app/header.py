@@ -45,8 +45,10 @@ def frame(title: str, version : str, get_logo_func=None):
         with ui.dropdown_button('', icon='account_circle', color='#004A77').classes('mr-4 mb-2').props('flat push no-icon-animation auto-close') as account_dropdown:
 
             with ui.element('div').classes('account-dropdown'):
-                # Display Name
-                ui.label('John Doe').classes('account-name')
+                # Display Name - get from user storage
+                user_data = app.storage.user.get('userdata', {})
+                user_name = user_data.get('name', 'John Doe')
+                ui.label(user_name).classes('account-name')
 
                 # Divider
                 ui.element('div').classes('account-separator')
@@ -65,7 +67,7 @@ def frame(title: str, version : str, get_logo_func=None):
                 ui.element('div').classes('account-separator')
 
                 # Logout Item
-                with ui.row().classes('account-menu-item logout').style('min-height: 48px;').on('click', lambda e: ui.notify('Logout clicked')):
+                with ui.row().classes('account-menu-item logout').style('min-height: 48px;').on('click', lambda e: ui.navigate.to('/logout')):
                     ui.icon('logout').classes('account-icon')
                     ui.label('Logout')
         
@@ -85,11 +87,11 @@ def frame(title: str, version : str, get_logo_func=None):
                                         ui.label('Neues item anlegen').style('color: black; font-size: 0.8rem; font-weight: 500;')
                 '''
 
-                with ui.link('', '/').classes(f'w-full no-underline text-black {"bg-light-blue-2" if current_route == "/" else ""}').style('border-radius: 2rem;'):
+                with ui.link('', '/dashboard').classes(f'w-full no-underline text-black {"bg-light-blue-2" if current_route == "/dashboard" else ""}').style('border-radius: 2rem;'):
                     with ui.row().classes('items-center mb-2 mt-2 cursor-pointer w-full no-wrap'):
-                        ui.icon('dashboard').classes(f'ml-5 text-2xl flex-shrink-0').style(f'{"color:#004A77;" if current_route == "/" else ""}')
-                        dashborad_label = ui.label('Dashboard').classes('text-lg sidebar-label ml-3 flex-shrink-0')
-                        sidebar_labels.append(dashborad_label)
+                        ui.icon('dashboard').classes(f'ml-5 text-2xl flex-shrink-0').style(f'{"color:#004A77;" if current_route == "/dashboard" else ""}')
+                        dashboard_label = ui.label('Dashboard').classes('text-lg sidebar-label ml-3 flex-shrink-0')
+                        sidebar_labels.append(dashboard_label)
 
                 with ui.link('', '/shipping').classes(f'w-full no-underline text-black {"bg-light-blue-3" if current_route.startswith("/shipping") or current_route.startswith("/customer") else ""}').style('border-radius: 2rem;'):
                     with ui.row().classes('items-center mb-2 mt-2 cursor-pointer w-full no-wrap'):

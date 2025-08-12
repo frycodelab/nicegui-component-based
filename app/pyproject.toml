@@ -9,4 +9,6 @@ dependencies = [
     "nicegui[highcharts]",
     "pyinstaller>=6.13.0",
     "pywebview>=5.4",
+    "requests>=2.31.0",
+    "authlib>=1.2.1",
 ]
