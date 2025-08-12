@@ -1,4 +1,4 @@
-# NiceGUI Component-Based Boilerplate
+# NiceGUI Component-Based Boilerplate with Login and User Management
 
 A modern, component-based NiceGUI application boilerplate with authentication, user management, responsive sidebar, and modular architecture. Built with `uv` for fast dependency management and featuring OAuth integration, local database support, and a comprehensive service layer.
 
