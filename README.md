@@ -52,7 +52,6 @@ A modern, component-based NiceGUI application boilerplate with authentication, u
 ```
 nicegui-base-main/
 ├── main.py                 # Main application entry point
-├── main_login.py           # Authentication-enabled entry point
 ├── header.py               # Header component with sidebar
 ├── footer.py               # Footer component (optional)
 ├── pyproject.toml          # UV/Python project configuration
@@ -144,11 +143,9 @@ nicegui-base-main/
 
 4. **Run the application**
    ```bash
-   # Without authentication
-   uv run python main.py
    
    # With authentication (recommended)
-   uv run python main_login.py
+   uv run python main.py
    ```
 
 5. **Default Admin Access**
