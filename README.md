@@ -24,9 +24,7 @@ A modern, component-based NiceGUI application boilerplate with a responsive side
 - **Modern Header** with account dropdown menu
 - **Component-based Architecture** for maintainable code
 - **Print System** with Base64 support for documents/images
-- **Custom Styling** with Google-inspired button designs
-- **Logo Optimization** with lazy loading and preloading
-- **Smooth Transitions** and animations throughout the app
+- **Custom Styling** with Google-inspired button 
 
 ### 🏗️ Architecture Features
 - **Modular Component System** - Each page is a separate component
@@ -141,7 +139,6 @@ Features a sophisticated sidebar with smooth animations:
 - **Label Animations** with fade-in/fade-out effects
 - **Active Route Highlighting** with visual indicators
 - **Account Dropdown** with modern styling
-- **Logo Integration** using CSS background for optimal performance
 
 **Animation System:**
 ```python
@@ -167,7 +164,6 @@ Advanced printing functionality supporting various content types:
 - **Base64 Decoding** for encoded content
 - **Non-blocking Print** using invisible iframes
 - **Automatic Window Management** 
-- **Error Handling** for malformed data
 
 ### 🎨 Global Styling (`global-css.css`)
 
@@ -318,20 +314,10 @@ python -m PyInstaller --name 'YourApp' --onedir main.py --add-data 'venv/Lib/sit
 
 ## 🎯 Performance Features
 
-### Logo Optimization
-- **Preloading**: `<link rel="preload" href="/assets/images/logo.png" as="image">`
-- **Global Instance**: Prevents reloading across page navigation
-- **CSS Background**: Better performance than `<img>` tags
-
 ### Asset Management
 - **Static File Serving**: Efficient delivery via `app.add_static_files('/assets', "assets")`
 - **CSS Injection**: Inline styles for optimal loading
 - **Icon Fonts**: Tabler Icons for scalable iconography
-
-### Animation Performance
-- **CSS Transitions**: Hardware-accelerated animations
-- **Strategic Delays**: Coordinated timing for smooth effects
-- **Class-based Management**: Efficient DOM manipulation
 
 ## 🧩 Services Architecture
 
@@ -372,15 +358,10 @@ ui.navigate.to(print_url)
 4. Add tests if applicable
 5. Submit a pull request
 
-## 📜 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 🙏 Acknowledgments
 
 - [NiceGUI](https://nicegui.io/) - The amazing Python web framework
 - [UV](https://github.com/astral-sh/uv) - Fast Python package manager
-- [Tabler Icons](https://tabler.io/icons) - Beautiful open-source icons
 - [Quasar Framework](https://quasar.dev/) - UI components underlying NiceGUI
 
 ## 📞 Support
