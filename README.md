@@ -57,8 +57,7 @@ nicegui-base-main/
 │   │   └── icons.css       # Tabler icons CSS
 │   └── images/
 │       ├── logo.png        # Application logo
-│       ├── extension_icon.png
-│       └── salzit.png
+│       └── extension_icon.png
 │
 ├── components/             # Page components
 │   ├── dashboard_content.py
