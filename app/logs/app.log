@@ -1,0 +1,18 @@
+2026-02-27 15:06:55,745 - __mp_main__ - INFO - App startup initiated
+2026-02-27 15:06:55,928 - __mp_main__ - INFO - Database initialized
+2026-02-27 15:08:09,581 - __mp_main__ - INFO - App startup initiated
+2026-02-27 15:08:09,666 - __mp_main__ - INFO - Database initialized
+2026-02-27 15:10:36,619 - __mp_main__ - INFO - App startup initiated
+2026-02-27 15:10:36,911 - __mp_main__ - INFO - Database initialized
+2026-02-27 15:11:24,761 - __mp_main__ - INFO - App startup initiated
+2026-02-27 15:11:25,002 - __mp_main__ - INFO - Database initialized
+2026-02-27 15:11:25,403 - components.database_content - INFO - Refreshing orders from database
+2026-02-27 15:11:25,410 - components.database_content - INFO - Fetched 5 orders
+2026-02-27 15:11:54,872 - __mp_main__ - INFO - App startup initiated
+2026-02-27 15:11:55,162 - __mp_main__ - INFO - Database initialized
+2026-02-27 15:11:55,406 - components.database_content - INFO - Refreshing orders from database
+2026-02-27 15:11:55,412 - components.database_content - INFO - Fetched 5 orders
+2026-02-27 15:12:07,441 - components.database_content - INFO - Refreshing orders from database
+2026-02-27 15:12:07,442 - components.database_content - INFO - Fetched 5 orders
+2026-02-27 15:12:09,140 - components.database_content - INFO - Refreshing orders from database
+2026-02-27 15:12:09,142 - components.database_content - INFO - Fetched 5 orders

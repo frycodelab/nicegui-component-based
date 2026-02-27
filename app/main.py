@@ -2,10 +2,39 @@
 
 import json
 import os
+import logging
+from logging.handlers import RotatingFileHandler
 from functools import wraps
 from pathlib import Path
-
 from nicegui import app, ui
+
+
+# ── Logging setup with rolling files ──────────────────────────────────────────────────────
+LOGS_DIR = Path('logs')
+LOGS_DIR.mkdir(exist_ok=True)
+
+root_logger = logging.getLogger()
+root_logger.setLevel(logging.INFO)
+
+# also keep a module logger for main
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+# rolling file handler (max 5MB per file, keep 5 backups)
+file_handler = RotatingFileHandler(
+    LOGS_DIR / 'app.log',
+    maxBytes=5_000_000,
+    backupCount=5
+)
+file_handler.setLevel(logging.INFO)
+file_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+file_handler.setFormatter(file_formatter)
+# attach handler to root logger so all module logs propagate to file
+root_logger.addHandler(file_handler)
+
+# suppress sqlalchemy engine logs
+logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
+
 
 import header
 import components.dashboard_content
@@ -19,6 +48,7 @@ import components.icons_content
 import components.settings_content
 import components.print_component
 import components.print_demo_content
+import components.database_content
 
 # ── Config ────────────────────────────────────────────────────────────────────────────────
 with open('config.json') as f:
@@ -29,6 +59,15 @@ appVersion = config["appVersion"]
 appPort    = config["appPort"]
 
 app.add_static_files('/assets', 'assets')
+
+from database.init_db import init_db
+
+@app.on_startup
+async def startup():
+    logger.info("App startup initiated")
+    await init_db()
+    logger.info("Database initialized")
+
 
 # ── Logo singleton — one instance shared across requests to avoid reload cost ──────
 logo_image = None
@@ -73,11 +112,10 @@ def root():
     '/packing' : packing,
     '/icons'      : icons,
     '/print-demo' : print_demo,
+    '/database'   : database,
     '/settings'   : settings,
     '/customer/{kundennummer}': customer_page,
     })
-
-
 
 # ── Sub-page handlers ────────────────────────────────────────────────────────────
 def index():
@@ -110,6 +148,9 @@ def print_demo():
 def settings():
     components.settings_content.content()
 
+def database():
+    components.database_content.content()
+
 def production_search(searchFilter):
     components.production_content.content(searchFilter=searchFilter)
 
@@ -125,7 +166,7 @@ def print_standalone(data: str):
 
 
 # ── Entry point — uncomment exactly one target ────────────────────────────────
-ui.run(root, storage_secret="myStorageSecret", title=appName, port=appPort, favicon='ico.ico', reconnect_timeout=20)
+ui.run(root, storage_secret="myStorageSecret", title=appName, port=appPort, favicon='ico.ico', reconnect_timeout=20)           # dev
 # ui.run(root, host='0.0.0.0', storage_secret="myStorageSecret", title=appName, port=appPort, favicon='ico.ico', reconnect_timeout=20, reload=False)           # prod
 # ui.run(root, storage_secret="myStorageSecret", title=appName, port=appPort, favicon='ico.ico', reload=False, native=True, window_size=(1600, 900))                # native
 # ui.run(root, storage_secret=os.environ['STORAGE_SECRET'], host=os.environ['HOST'], title=appName, port=appPort, favicon='ico.ico', reconnect_timeout=20, reload=False)  # docker
