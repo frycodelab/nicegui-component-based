@@ -106,6 +106,13 @@ def frame(title: str, version: str, get_logo_func=None):
                 sidebar_labels.append(print_demo_label)
         nav_links.append({'link': print_demo_link, 'icon': print_demo_icon, 'patterns': ['/print-demo'], 'exact': False})
 
+        with ui.link('', '/database').classes('w-full no-underline text-black').style('border-radius: 2rem;') as database_link:
+            with ui.row().classes('items-center mb-2 mt-2 cursor-pointer w-full no-wrap'):
+                database_icon = ui.icon('dns').classes('ml-5 text-2xl flex-shrink-0')
+                database_label = ui.label('Database').classes('text-lg sidebar-label ml-3 flex-shrink-0')
+                sidebar_labels.append(database_label)
+        nav_links.append({'link': database_link, 'icon': database_icon, 'patterns': ['/database'], 'exact': False})
+
 
         ui.separator()
 
