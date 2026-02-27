@@ -39,6 +39,12 @@ app/
 │   │   ├── global-css.css
 │   │   └── icons.css
 │   └── images/
+├── database/                     # Database layer (models & helpers)
+│   ├── crud.py
+│   ├── db.py
+│   ├── init_db.py
+│   ├── models.py
+│   └── __pycache__/
 ├── components/                  # Page components
 │   ├── dashboard_content.py
 │   ├── design_system_content.py # Live design system reference
@@ -122,6 +128,31 @@ Run in development:
 ```bash
 uv run python main.py
 ```
+
+## Logging
+
+- **Log files:** At startup the app creates a `logs` folder and writes rotating logs to `logs/app.log` (configured in `app/main.py`). The handler is a `RotatingFileHandler` configured with a 5 MB file size and 5 backup files by default.
+- **Capture module logs:** The logging handler is attached to the root logger so `logging.getLogger(__name__)` calls from other modules (for example in components and services) are written to `logs/app.log`.
+- **Control SQL verbosity:** SQLAlchemy engine SQL output is controlled by the engine `echo` flag and the `sqlalchemy.engine` logger level. To enable verbose SQL to console/file, set `echo=True` in `app/database/db.py` or change the logger level for `sqlalchemy.engine`.
+- **Quick dev commands:**
+
+```powershell
+cd app
+uv run python main.py
+# On Windows (PowerShell) tail logs:
+Get-Content .\logs\app.log -Wait -Tail 50
+```
+
+## Database initialization and seeding
+
+- **Auto-seed on startup:** The project ships with `app/database/init_db.py` which creates tables and inserts deterministic sample rows. By default the initializer will clear the target tables and seed sample data so the UI tables are populated immediately in development.
+- **Run seeding manually:** From the `app/` folder you can run the initializer directly if you need to reseed without restarting the full app:
+
+```bash
+python -c "from database.init_db import init_db; import asyncio; asyncio.run(init_db())"
+```
+
+- **Customize seeding:** Edit `app/database/init_db.py` to change which sample rows are inserted or to guard seeding behind an environment variable if you want to preserve production data.
 
 ## Adding or updating a component
 
