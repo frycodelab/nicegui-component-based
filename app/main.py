@@ -130,5 +130,4 @@ ui.run(root, storage_secret="myStorageSecret", title=appName, port=appPort, favi
 # ui.run(root, storage_secret="myStorageSecret", title=appName, port=appPort, favicon='ico.ico', reload=False, native=True, window_size=(1600, 900))                # native
 # ui.run(root, storage_secret=os.environ['STORAGE_SECRET'], host=os.environ['HOST'], title=appName, port=appPort, favicon='ico.ico', reconnect_timeout=20, reload=False)  # docker
 
-#ui.run(root, storage_secret=os.environ.get('STORAGE_SECRET', 'myStorageSecret'), host=os.environ.get('HOST', '0.0.0.0'), title=appName, port=appPort, favicon='ico.ico', reconnect_timeout=20, reload=False, on_air='qe2X7GHI9mcjiwgh')
 # python -m PyInstaller --name 'ProductionSuite' --onedir main.py --add-data '...\nicegui;nicegui' --noconfirm --clean
