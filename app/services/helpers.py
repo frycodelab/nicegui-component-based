@@ -1,2 +1,5 @@
-async def dummy_function():
-    return "Helper function called successfully!" 
+"""Shared async utility stubs — replace with real business logic as the app grows."""
+
+
+async def dummy_function() -> dict:
+    return {"message": "Helper function called successfully!", "status": "positive"}

@@ -1,9 +1,12 @@
+"""Application footer — copyright notice and GitHub link."""
+
 from contextlib import contextmanager
 
-from nicegui import ui,app
+from nicegui import ui, app
+
 
 @contextmanager
-def frame(title: str, version : str):
+def frame(title: str, version: str):
     ui.add_head_html('<link href="https://unpkg.com/eva-icons@1.1.3/style/eva-icons.css" rel="stylesheet" />')
 
     with ui.footer().classes('w-full items-center'):

@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "nicegui",
+    "nicegui==3.8.0",
     "nicegui[highcharts]",
     "pyinstaller>=6.13.0",
     "pywebview>=5.4",
