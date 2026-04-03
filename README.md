@@ -17,11 +17,16 @@ This repository is a starter template for building web applications with NiceGUI
 - Small service modules for notifications and mock dashboard data
 
 Target: desktop and tablet (not optimized for mobile)
+https://demo.frycode-lab.com/
 
 ![Python](https://img.shields.io/badge/python-v3.11+-blue.svg)
 ![NiceGUI](https://img.shields.io/badge/NiceGUI-latest-green.svg)
 ![UV](https://img.shields.io/badge/uv-package%20manager-orange.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
+
+## Demo
+
+[https://demo.frycode-lab.com/](https://demo.frycode-lab.com/)
 
 <img align="center" src="/Demo.gif">
 
