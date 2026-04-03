@@ -9,4 +9,6 @@ dependencies = [
     "nicegui[highcharts]",
     "pyinstaller>=6.13.0",
     "pywebview>=5.4",
+    "aiosqlite",
+    "sqlalchemy",
 ]
