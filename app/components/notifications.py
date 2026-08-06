@@ -1,7 +1,7 @@
 """
-Custom notification service — renders fully styled HTML toasts.
+Custom notification service that renders fully styled HTML toasts.
 Usage:
-    from services.notifications import notify, notify_ongoing
+    from components.notifications import notify, notify_ongoing
     notify('Saved successfully', type='positive', title='Success')
     notify('Something went wrong', type='negative', title='Error')
     notify('Review your input', type='warning')
@@ -15,7 +15,7 @@ Usage:
 import uuid
 from nicegui import ui
 
-# Global default position — change once here to affect all notifications.
+# Global default position; change once here to affect all notifications.
 # Accepted values: 'top-left' | 'top' | 'top-right' |
 #                  'bottom-left' | 'bottom' | 'bottom-right'
 DEFAULT_POSITION: str = 'bottom-right'

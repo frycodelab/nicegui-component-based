@@ -1,13 +1,18 @@
 services:
   nicegui:
-    image: template-dss:latest
-    build:
-      context: .
+    build: .
+    image: template:latest
+    container_name: template
+    # Publish the app on the host so it is reachable at http://localhost:8080
     ports:
-      - 8080:8080
-    volumes:
-      - ./app:/app # mounting local app directory
+      - "8080:8080"
     environment:
-      - PUID=1000 # change this to your user id
-      - PGID=1000 # change this to your group id
-      - STORAGE_SECRET="change-this-to-yor-own-private-secret"
+      # Optional: pin the secret by setting STORAGE_SECRET in your shell or a .env file.
+      # If left unset, _get_storage_secret() generates and persists a strong one in app/data/.
+      - STORAGE_SECRET=${STORAGE_SECRET:-}
+      # Bind to all interfaces inside the container so the published port works.
+      - HOST=0.0.0.0
+    # Mount the app source so data/, logs/ and backup/ persist on the host.
+    volumes:
+      - ./app:/app
+    restart: unless-stopped

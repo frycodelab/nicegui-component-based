@@ -1,6 +1,4 @@
-/* ============================================================
-   DESIGN TOKENS 
-   ============================================================ */
+/* Design tokens */
 
 @font-face {
   font-family: 'Inter';
@@ -55,6 +53,9 @@
   --radius-lg:    12px;
   --radius-full:  9999px;
 
+  /* Fluid base size; all --text-* tokens are rem-based and scale from here */
+  --app-font-size: clamp(12px, 13.6px + 0.2vw, 14px);
+
   --text-xs:   0.75rem;
   --text-sm:   0.875rem;
   --text-base: 1rem;
@@ -70,10 +71,11 @@
   --transition: 0.15s ease;
 }
 
+html { font-size: var(--app-font-size); }
+body { font-size: var(--app-font-size) !important; }
 
-/* ============================================================
-   TYPOGRAPHY UTILITIES
-   ============================================================ */
+
+/* Typography utilities */
 .text-xs   { font-size: var(--text-xs) !important; }
 .text-sm   { font-size: var(--text-sm) !important; }
 .text-base { font-size: var(--text-base) !important; }
@@ -114,15 +116,20 @@
   letter-spacing: 0.05em !important;
 }
 
+.login-card {
+  background: var(--bg) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+  padding: 28px 28px 24px !important;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.15), 0 4px 12px rgba(0,0,0,0.07) !important;
+}
 
-/* ============================================================
-   BUTTONS
-   ============================================================ */
+/* Buttons */
 .button {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 6px !important;
+  gap: 8px !important;
   padding: 8px 16px !important;
   font-size: var(--text-sm) !important;
   font-weight: var(--font-medium) !important;
@@ -136,7 +143,6 @@
   line-height: 1.25 !important;
 }
 
-/* Primary */
 .button-primary {
   background: var(--primary) !important;
   color: var(--primary-fg) !important;
@@ -144,7 +150,6 @@
 }
 .button-primary:hover { background: #27272a !important; border-color: #27272a !important; }
 
-/* Secondary */
 .button-secondary {
   background: var(--secondary) !important;
   color: var(--secondary-fg) !important;
@@ -152,7 +157,6 @@
 }
 .button-secondary:hover { background: var(--accent) !important; }
 
-/* Outline */
 .button-outline {
   background: transparent !important;
   color: var(--fg) !important;
@@ -160,7 +164,6 @@
 }
 .button-outline:hover { background: var(--faint) !important; }
 
-/* Ghost */
 .button-ghost {
   background: transparent !important;
   color: var(--fg) !important;
@@ -168,7 +171,6 @@
 }
 .button-ghost:hover { background: var(--secondary) !important; }
 
-/* Danger */
 .button-danger {
   background: var(--danger) !important;
   color: var(--danger-fg) !important;
@@ -176,7 +178,6 @@
 }
 .button-danger:hover { background: #dc2626 !important; border-color: #dc2626 !important; }
 
-/* Success */
 .button-success {
   background: var(--success) !important;
   color: var(--success-fg) !important;
@@ -184,11 +185,9 @@
 }
 .button-success:hover { background: #43a047 !important; border-color: #43a047 !important; }
 
-/* Sizes */
 .button-sm { padding: 5px 10px !important; font-size: var(--text-xs) !important; }
 .button-lg { padding: 11px 22px !important; font-size: var(--text-base) !important; }
 
-/* Disabled state */
 .button:disabled,
 .button.disabled {
   opacity: 0.45 !important;
@@ -197,9 +196,7 @@
 }
 
 
-/* ============================================================
-   QUASAR INPUT / SELECT — compact override
-   ============================================================ */
+/* Quasar input / select (compact) */
 .q-field--outlined .q-field__control,
 .q-field--standout .q-field__control,
 .q-field--outlined.q-field--float .q-field__control,
@@ -224,7 +221,6 @@
 .q-field__marginal {
   height: 36px !important;
 }
-/* Suppress floating label shift */
 .q-field--outlined.q-field--labeled .q-field__native,
 .q-field--outlined.q-field--float .q-field__native {
   padding-top: 0 !important;
@@ -233,7 +229,7 @@
 .q-field--float .q-field__control-container {
   padding-top: 0 !important;
 }
-/* Hide the floating label entirely — placeholder text is sufficient */
+/* Hide floating label; placeholder text is enough */
 .q-field__label {
   display: none !important;
 }
@@ -250,9 +246,7 @@
   border-left: none !important;
 }
 
-/* ============================================================
-   INPUTS & FORM ELEMENTS
-   ============================================================ */
+/* Inputs & form elements */
 .input {
   width: 100% !important;
   padding: 8px 12px !important;
@@ -295,9 +289,7 @@
 }
 
 
-/* ============================================================
-   CARDS / PANELS
-   ============================================================ */
+/* Cards / panels */
 .card {
   background: var(--bg) !important;
   border: 1px solid var(--border) !important;
@@ -335,9 +327,7 @@
 }
 
 
-/* ============================================================
-   BADGES
-   ============================================================ */
+/* Badges */
 .badge {
   display: inline-flex !important;
   align-items: center !important;
@@ -358,9 +348,7 @@
 .badge-outline  { background: transparent !important; color: var(--fg) !important; border-color: var(--border) !important; }
 
 
-/* ============================================================
-   STATUS DOT
-   ============================================================ */
+/* Status dot */
 .status-dot {
   display: inline-block !important;
   width: 8px !important;
@@ -375,9 +363,7 @@
 .status-dot.muted   { background: var(--muted-fg) !important; }
 
 
-/* ============================================================
-   ALERTS / BANNERS
-   ============================================================ */
+/* Alerts / banners */
 .alert {
   display: flex !important;
   align-items: center !important;
@@ -411,9 +397,7 @@
 .alert-info::before    { content: "\eac5" !important; color: var(--info)    !important; } /* info-circle */
 
 
-/* ============================================================
-   TABLES
-   ============================================================ */
+/* Tables */
 .data-table {
   width: 100% !important;
   border-collapse: collapse !important;
@@ -429,20 +413,30 @@
   font-size: var(--text-xs) !important;
   text-transform: uppercase !important;
   letter-spacing: 0.05em !important;
+  white-space: nowrap !important;
 }
 .data-table td {
   padding: 12px 14px !important;
   color: var(--fg) !important;
   border-bottom: 1px solid var(--border) !important;
   vertical-align: middle !important;
+  white-space: nowrap !important;
 }
 .data-table tbody tr:last-child td { border-bottom: none !important; }
 .data-table tbody tr:hover td { background: var(--faint) !important; }
 
+/* Small screens: scroll the table horizontally instead of widening the page */
+@media (max-width: 1024px) {
+  .data-table {
+    display: block !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    white-space: nowrap !important;
+  }
+}
 
-/* ============================================================
-   DIVIDER
-   ============================================================ */
+
+/* Divider */
 .divider {
   border: none !important;
   border-top: 1px solid var(--border) !important;
@@ -450,9 +444,7 @@
 }
 
 
-/* ============================================================
-   SPACING UTILITIES
-   ============================================================ */
+/* Spacing utilities */
 .mt-0 { margin-top: 0 !important; }
 .mt-1 { margin-top: 4px !important; }
 .mt-2 { margin-top: 8px !important; }
@@ -475,9 +467,7 @@
 .gap-4 { gap: 16px !important; }
 
 
-/* ============================================================
-   FLEX / LAYOUT UTILITIES
-   ============================================================ */
+/* Flex / layout utilities */
 .flex         { display: flex !important; }
 .flex-col     { flex-direction: column !important; }
 .items-center { align-items: center !important; }
@@ -490,9 +480,7 @@
 .w-full       { width: 100% !important; }
 
 
-/* ============================================================
-   EXISTING APP-SPECIFIC STYLES (unchanged below)
-   ============================================================ */
+/* App-specific styles */
 
 /* Header account / profile button */
 .header-account-btn {
@@ -517,7 +505,6 @@
   color: var(--fg) !important;
 }
 
-/* Dropdown container */
 .account-dropdown {
   font-family: 'Roboto', sans-serif;
   min-width: 200px;
@@ -530,9 +517,7 @@
 
 q-menu {
   border-radius: 12px !important;
-  /* Additional styles for the menu can be added here */
 }
-/* User name / title */
 .account-dropdown .account-name {
   font-weight: 600;
   font-size: 1.2rem;
@@ -541,13 +526,11 @@ q-menu {
   letter-spacing: 0.015em;
 }
 
-/* Separator line */
 .account-dropdown .account-separator {
   border-top: 1px solid #e0e0e0;
   margin: 0 24px 16px 24px;
 }
 
-/* Menu item */
 .account-menu-item {
   display: flex;
   align-items: center;
@@ -565,7 +548,6 @@ q-menu {
   background-color: #f4f6fb;
 }
 
-/* Icon next to menu item */
 .account-menu-item .account-icon {
   color: var(--muted-fg);
   font-size: 1.4rem;
@@ -576,12 +558,10 @@ q-menu {
   color: var(--fg);
 }
 
-/* Logout icon inherits the danger color */
 .account-menu-item.logout .account-icon {
   color: var(--danger);
 }
 
-/* Logout item */
 .account-menu-item.logout {
   color: #e53935;
 }
@@ -598,9 +578,7 @@ q-menu {
 
 .google-print-button {
   background-color: #f5f5f5;
-  /* Light gray background */
   border: 1px solid #ccc;
-  /* Light gray border */
   border-radius: 3px;
   padding: 6px 10px;
   cursor: pointer;
@@ -613,7 +591,6 @@ q-menu {
 .google-print-button svg {
   margin-right: 5px;
   fill: #4285f4;
-  /* Google blue */
 }
 
 .container {
@@ -640,7 +617,7 @@ q-menu {
 
 .app-name {
   font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-  font-size: 24px;
+  font-size: clamp(13px, 12px + 1.2vw, 22px);
   font-weight: 600;
   color: #333;
   margin: 0;
@@ -648,7 +625,6 @@ q-menu {
   letter-spacing: -0.02em;
 }
 
-/* Smooth sidebar transitions */
 .q-drawer {
   transition: width 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) !important;
 }
@@ -663,34 +639,48 @@ q-menu {
 }
 
 .sidebar-label.collapsed {
-  opacity: 0;
-  transform: translateX(-10px);
+  opacity: 0 !important;
+  transform: translateX(-10px) !important;
   width: 0 !important;
   min-width: 0 !important;
 }
 
 .sidebar-label.expanded {
-  opacity: 1;
-  transform: translateX(0);
-  width: auto;
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  width: auto !important;
+  min-width: auto !important;
 }
 
-/* Active sidebar nav link highlight */
+/* Active sidebar nav link */
 .nav-link-active {
   background: var(--accent) !important;
   border-radius: 2rem !important;
+  position: relative !important;
+}
+.nav-link-active::before {
+  content: '' !important;
+  position: absolute !important;
+  left: 18px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 4px !important;
+  height: 60% !important;
+  border-radius: 4px !important;
+  background: #4F8CE8 !important;
+}
+.q-drawer .q-icon.text-2xl {
+  margin-left: 2.25rem !important;
 }
 .nav-link-active .q-icon,
 .nav-icon-active {
   color: var(--primary) !important;
 }
 
-/* Ensure row layout stability */
 .q-item__section {
   align-items: center !important;
 }
 
-/* Prevent layout shifts during transitions */
 .sidebar-row {
   min-height: 48px;
   align-items: center;
@@ -708,9 +698,7 @@ q-menu {
   flex-wrap: nowrap;
 }
 
-/* ============================================================
-   PROGRESS BARS
-   ============================================================ */
+/* Progress bars */
 .progress-wrap {
   width: 100%;
 }
@@ -719,7 +707,7 @@ q-menu {
   height: 8px !important;
   border-radius: var(--radius-full) !important;
   background: var(--accent) !important;
-  /* Suppress Quasar's currentColor flash on initial render */
+  /* Prevent Quasar currentColor flash on first render */
   color: transparent !important;
 }
 .progress-bar .q-linear-progress__track       { background: var(--accent) !important; }
@@ -727,26 +715,20 @@ q-menu {
 .progress-bar.progress-success .q-linear-progress__model { background: #4ade80 !important; }
 .progress-bar.progress-warning .q-linear-progress__model { background: #fbbf24 !important; }
 .progress-bar.progress-danger  .q-linear-progress__model { background: #f87171 !important; }
-/* Also kill any SVG/buffer fill that could flash */
 .progress-bar .q-linear-progress__model--with-transition { background: inherit !important; }
 
 
-/* ============================================================
-   CIRCULAR PROGRESS
-   ============================================================ */
-/* Quasar drives the SVG stroke via currentColor — override per variant */
+/* Circular progress */
+/* Quasar strokes the SVG via currentColor; override per variant */
 .q-circular-progress .text-primary  { color: #60a5fa !important; }
 .q-circular-progress .text-positive { color: #4ade80 !important; }
 .q-circular-progress .text-negative { color: #f87171 !important; }
 .q-circular-progress .text-warning  { color: #fbbf24 !important; }
 .q-circular-progress .text-info     { color: #60a5fa !important; }
-/* Track ring */
 .q-circular-progress__svg .q-circular-progress__track { stroke: var(--accent) !important; }
 
 
-/* ============================================================
-   DIALOGS
-   ============================================================ */
+/* Dialogs */
 .dialog-card {
   background: var(--bg) !important;
   border: 1px solid var(--border) !important;
@@ -774,9 +756,7 @@ q-menu {
 }
 
 
-/* ============================================================
-   TOOLTIPS
-   ============================================================ */
+/* Tooltips */
 .tooltip {
   background: var(--primary) !important;
   color: var(--primary-fg) !important;
@@ -790,10 +770,14 @@ q-menu {
   color: var(--danger-fg) !important;
 }
 
+.tooltip.sidebar-hint {
+  font-size: var(--text-sm) !important;
+  padding: 6px 12px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16) !important;
+}
 
-/* ============================================================
-   POPOVER / MENU
-   ============================================================ */
+
+/* Popover / menu */
 .popover {
   background: var(--bg) !important;
   border: 1px solid var(--border) !important;
@@ -822,9 +806,7 @@ q-menu {
 }
 
 
-/* ============================================================
-   TABS
-   ============================================================ */
+/* Tabs */
 .tabs-bar {
   border-bottom: 2px solid var(--border) !important;
 }
@@ -845,9 +827,7 @@ q-menu {
 }
 
 
-/* ============================================================
-   DATE / TIME PICKER
-   ============================================================ */
+/* Date / time picker */
 .picker-card {
   border: 1px solid var(--border) !important;
   border-radius: var(--radius) !important;
@@ -868,16 +848,12 @@ q-menu {
 }
 
 
-/* ============================================================
-   SLIDER
-   ============================================================ */
+/* Slider */
 .q-slider__thumb-shape { fill: var(--primary) !important; }
 .q-slider__track-container .q-slider__track { background: var(--primary) !important; }
 
 
-/* ============================================================
-   UPLOAD AREA
-   ============================================================ */
+/* Upload area */
 .upload-area {
   border: 2px dashed var(--input-border) !important;
   border-radius: var(--radius) !important;
@@ -897,9 +873,85 @@ q-menu {
 }
 
 
-/* ============================================================
-   ACCORDION / EXPANSION
-   ============================================================ */
+/* Dropzone */
+.dropzone {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 160px;
+  width: 100%;
+  border: 2px dashed var(--input-border);
+  border-radius: var(--radius-lg);
+  background: var(--faint);
+  transition: border-color var(--transition), background var(--transition);
+  cursor: pointer;
+  overflow: hidden;
+}
+.dropzone:hover {
+  border-color: var(--primary);
+  background: var(--bg);
+}
+.dropzone__content {
+  align-items: center;
+  gap: 0.35rem;
+  text-align: center;
+  pointer-events: none;
+  z-index: 1;
+}
+.dropzone__icon {
+  font-size: 2.5rem !important;
+  color: var(--muted-fg);
+}
+.dropzone__title {
+  font-weight: 600;
+  color: var(--fg);
+}
+.dropzone__hint {
+  font-size: var(--text-sm);
+  color: var(--muted-fg);
+}
+/* Invisible uploader overlay that still captures clicks and drops */
+.dropzone__input {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  max-height: none !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  opacity: 0;
+}
+.dropzone__input .q-uploader__header {
+  position: absolute;
+  inset: 0;
+  padding: 0;
+  background: transparent !important;
+}
+.dropzone__input .q-uploader__header-content {
+  position: absolute;
+  inset: 0;
+  padding: 0;
+  min-height: 0;
+}
+.dropzone__input .q-uploader__list {
+  display: none !important;
+}
+/* Stretch the add-files button over the whole zone */
+.dropzone__input .q-uploader__header-content .q-btn {
+  position: absolute !important;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border-radius: var(--radius-lg);
+}
+
+
+/* Accordion / expansion */
 .accordion-item {
   font-size: var(--text-sm) !important;
   color: var(--fg) !important;
@@ -916,9 +968,7 @@ q-menu {
 }
 
 
-/* ============================================================
-   STEPPER
-   ============================================================ */
+/* Stepper */
 .stepper .q-stepper__step-inner { padding: 4px 16px 16px 60px !important; }
 .stepper .q-stepper__title { font-size: var(--text-sm) !important; font-weight: var(--font-medium) !important; color: var(--fg) !important; background: #ffffff; }
 .stepper .q-stepper__caption { font-size: var(--text-xs) !important; color: var(--muted-fg) !important; }
@@ -928,9 +978,7 @@ q-menu {
 .stepper .q-stepper__line { background: var(--border) !important; }
 
 
-/* ============================================================
-   AVATAR
-   ============================================================ */
+/* Avatar */
 .q-avatar {
   display: inline-flex !important;
   align-items: center !important;
@@ -945,9 +993,7 @@ q-menu {
 }
 
 
-/* ============================================================
-   CHIPS / TAGS
-   ============================================================ */
+/* Chips / tags */
 .chip {
   display: inline-flex !important;
   align-items: center !important;
@@ -968,9 +1014,7 @@ q-menu {
 .chip-info    { background: var(--info-light) !important;    color: #1e40af !important; border-color: var(--info) !important; }
 
 
-/* ============================================================
-   SKELETON LOADING
-   ============================================================ */
+/* Skeleton loading */
 @keyframes skeleton-pulse {
   0%, 100% { opacity: 1; }
   50%       { opacity: 0.4; }
@@ -985,9 +1029,7 @@ q-menu {
 .skeleton-rect   { width: 100% !important; height: 80px !important; border-radius: var(--radius) !important; }
 
 
-/* ============================================================
-   SPLITTER
-   ============================================================ */
+/* Splitter */
 .splitter-wrap .q-splitter__separator {
   background: var(--border) !important;
   width: 3px !important;
@@ -997,9 +1039,7 @@ q-menu {
 }
 
 
-/* ============================================================
-   CODE BLOCK
-   ============================================================ */
+/* Code block */
 .code-block {
   border-radius: var(--radius) !important;
   font-size: var(--text-xs) !important;
@@ -1010,18 +1050,14 @@ q-menu {
 }
 
 
-/* ============================================================
-   TIMELINE
-   ============================================================ */
+/* Timeline */
 .q-timeline__dot { background: var(--bg) !important; }
 .q-timeline__subtitle { font-size: var(--text-xs) !important; color: var(--muted-fg) !important; }
 .q-timeline__title { font-size: var(--text-sm) !important; font-weight: var(--font-medium) !important; color: var(--fg) !important; }
 .q-timeline__content { font-size: var(--text-sm) !important; color: var(--muted-fg) !important; }
 
 
-/* ============================================================
-   BREADCRUMBS
-   ============================================================ */
+/* Breadcrumbs */
 .breadcrumb {
   display: flex !important;
   align-items: center !important;
@@ -1045,9 +1081,7 @@ q-menu {
 }
 
 
-/* ============================================================
-   PAGINATION
-   ============================================================ */
+/* Pagination */
 .pagination .q-btn {
   border-radius: var(--radius-sm) !important;
   font-size: var(--text-sm) !important;
@@ -1060,9 +1094,7 @@ q-menu {
 }
 
 
-/* ============================================================
-   CUSTOM TOAST
-   ============================================================ */
+/* Toast */
 .toast {
   pointer-events: all;
   display: flex;
@@ -1121,7 +1153,6 @@ q-menu {
 .toast-icon-info     { color: #3b82f6; }
 .toast-icon-default  { color: #71717a; }
 
-/* spinning loader for ongoing toasts */
 @keyframes toast-spin {
   to { transform: rotate(360deg); }
 }
@@ -1178,3 +1209,199 @@ q-menu {
 .toast-progress-warning  { background: #f59e0b; }
 .toast-progress-info     { background: #3b82f6; }
 .toast-progress-default  { background: #71717a; }
+
+@media (max-width: 750px) {
+  .toast {
+    min-width: 280px;
+    max-width: 300px;
+    border-radius: 8px;
+  }
+  
+  .toast-body {
+    gap: 10px;
+    padding: 12px 12px 12px 14px;
+  }
+  
+  .toast-icon {
+    font-size: 20px;
+  }
+  
+  .toast-title {
+    font-size: 0.8125rem;
+  }
+  
+  .toast-message {
+    font-size: 0.8125rem;
+  }
+  
+  .toast-close {
+    font-size: 16px;
+    padding: 2px;
+  }
+  .button{
+      padding: 2px 8px 6px 8px !important;
+  }
+}
+
+
+/* Mobile: app header */
+.mobile-app-header {
+  background: rgba(248, 250, 253, 0.82) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--border) !important;
+  box-shadow: none !important;
+}
+.mobile-app-header .app-name {
+  letter-spacing: -0.02em;
+}
+
+
+/* Mobile: content spacing */
+/* Clears the floating nav below the desktop breakpoint */
+@media (max-width: 1024px) {
+  .mobile-content {
+    padding-bottom: calc(104px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+
+/* Mobile: floating bottom navigation */
+.mobile-nav-floating {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 2000;
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+  width: min(440px, calc(100% - 32px));
+  padding: 6px;
+  background: rgba(255, 255, 255, 0.78);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid rgba(9, 9, 11, 0.06);
+  border-radius: var(--radius-full);
+  box-shadow: 0 12px 32px rgba(9, 9, 11, 0.16),
+              0 2px 8px rgba(9, 9, 11, 0.06);
+}
+
+.mobile-nav-item {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 8px 4px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  text-decoration: none !important;
+  color: var(--muted-fg) !important;
+  transition: color var(--transition), background var(--transition);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+.mobile-nav-item:hover { color: var(--fg) !important; }
+.mobile-nav-item:active { transform: scale(0.96); }
+
+.mobile-nav-icon {
+  font-size: 1.5rem !important;
+  line-height: 1 !important;
+  transition: transform var(--transition);
+}
+.mobile-nav-label {
+  font-size: 0.6875rem !important;
+  font-weight: var(--font-medium) !important;
+  line-height: 1 !important;
+  letter-spacing: 0.005em;
+  white-space: nowrap;
+}
+
+.mobile-nav-active {
+  color: var(--primary) !important;
+  background: var(--secondary) !important;
+}
+.mobile-nav-active .mobile-nav-icon { color: var(--primary) !important; transform: translateY(-1px); }
+.mobile-nav-active .mobile-nav-label { color: var(--primary) !important; font-weight: var(--font-semi) !important; }
+
+
+/* Mobile: burger bottom sheet */
+.mobile-sheet {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  margin: 0 !important;
+  padding: 8px 20px calc(28px + env(safe-area-inset-bottom, 0px)) !important;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0 !important;
+  box-shadow: 0 -12px 40px rgba(9, 9, 11, 0.18) !important;
+  background: var(--bg) !important;
+}
+.mobile-sheet-handle {
+  width: 40px;
+  height: 4px;
+  margin: 8px auto 18px;
+  border-radius: var(--radius-full);
+  background: var(--input-border);
+}
+.mobile-sheet-title {
+  display: block;
+  margin-bottom: 16px;
+  font-size: var(--text-xs) !important;
+  font-weight: var(--font-semi) !important;
+  color: var(--muted-fg) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.mobile-sheet-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+.mobile-sheet-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px 8px;
+  border-radius: var(--radius);
+  background: var(--faint);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), transform var(--transition);
+  -webkit-tap-highlight-color: transparent;
+}
+.mobile-sheet-item:hover { background: var(--secondary); border-color: var(--input-border); }
+.mobile-sheet-item:active { transform: scale(0.97); }
+.mobile-sheet-icon {
+  font-size: 1.5rem !important;
+  color: var(--fg) !important;
+}
+.mobile-sheet-label {
+  font-size: var(--text-xs) !important;
+  font-weight: var(--font-medium) !important;
+  color: var(--fg) !important;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Narrow phones: 2-up grid */
+@media (max-width: 360px) {
+  .mobile-sheet-grid { grid-template-columns: repeat(2, 1fr); }
+  .mobile-nav-label  { font-size: 0.625rem !important; }
+}
+
+/* Sidebar replaces the floating nav on desktop. Quasar switches the drawer at
+   <=1024, so keep the nav visible through 1024 and hide it from 1025. */
+@media (min-width: 1025px) {
+  .mobile-nav-floating { display: none !important; }
+}
+
+/* On mobile the account actions live in the burger sheet, so hide the top-bar button */
+@media (max-width: 1024px) {
+  .header-account-btn { display: none !important; }
+}

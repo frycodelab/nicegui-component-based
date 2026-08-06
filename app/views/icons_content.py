@@ -3,8 +3,9 @@
 import re
 from pathlib import Path
 from nicegui import ui
+from services.i18n import t
 
-# ── Parse Tabler icons from icons.css at module load ──────────────────────────────────────────────────────
+# Parse Tabler icons from icons.css at module load
 def _load_tabler_icons() -> list[str]:
     css_path = Path(__file__).parent.parent / "assets" / "css" / "icons.css"
     text = css_path.read_text(encoding="utf-8", errors="ignore")
@@ -14,7 +15,7 @@ def _load_tabler_icons() -> list[str]:
 
 _TABLER_ICONS: list[str] = _load_tabler_icons()
 
-# ── Google Material Icons curated list ──────────────────────────────────────────────────────────────
+# Google Material Icons curated list
 _MATERIAL_ICONS: list[str] = sorted([
     # Navigation & UI
     "home","menu","close","search","settings","more_vert","more_horiz",
@@ -141,7 +142,7 @@ _MATERIAL_ICONS: list[str] = sorted([
 
 _PAGE_SIZE = 200
 
-# ── Copy-to-clipboard JS + tile CSS (injected once into page body) ────────────
+# Copy-to-clipboard JS + tile CSS (injected once into page body)
 _COPY_JS = """
 <style>
     .ib-grid-inner {
@@ -239,52 +240,53 @@ window.ibCopy = function(text, tile) {
 """
 
 
-# ── Component entry point ──────────────────────────────────────────────────────
+# Component entry point
 def content() -> None:
     ui.add_body_html(_COPY_JS)
 
-    # ── Page header ───────────────────────────────────────────────────────────
     with ui.row().classes('w-full items-start justify-between mb-1'):
         with ui.column().classes('gap-0'):
-            ui.label('Icon Browser').classes('page-title')
+            ui.label(t('icons.title')).classes('page-title')
             ui.label(
-                f'{len(_TABLER_ICONS):,} Tabler icons + {len(_MATERIAL_ICONS):,} Material icons'
-                ' — click any icon to copy its class string.'
+                t('icons.subtitle').format(
+                    tabler=f'{len(_TABLER_ICONS):,}',
+                    material=f'{len(_MATERIAL_ICONS):,}',
+                )
             ).classes('text-sm text-muted')
         ui.label('v2.47.0').classes('text-xs text-faint self-center px-2 py-1 rounded').style(
             'background:var(--faint); border:1px solid var(--border)')
     ui.element('div').classes('divider mb-3')
 
-    # ── Usage hint alert ──────────────────────────────────────────────────────
+    # Usage hint alert
     with ui.element('div').classes('alert alert-info mb-3').style('display:flex; align-items:flex-start; gap:10px'):
         with ui.column().classes('gap-0'):
-            ui.label('How to use in NiceGUI').classes('font-semi text-sm')
+            ui.label(t('icons.how_to')).classes('font-semi text-sm')
             ui.label(
                 'Tabler: ui.html(\'<i class="ti ti-{name}"></i>\')')
             ui.label(    'Material: ui.icon(\'{name}\')    ')
-            ui.label(    'Click any icon to copy its string.').classes('text-sm')
+            ui.label(    t('icons.click_copy')).classes('text-sm')
 
-    # ── State ─────────────────────────────────────────────────────────────────
+    # State
     state = {'tab': 'tabler', 'query': '', 'page': 1}
 
-    # ── Toolbar: tabs + search + count ────────────────────────────────────────
+    # Toolbar: tabs + search + count
     with ui.row().classes('w-full items-center gap-3 flex-wrap mb-3'):
         with ui.tabs(value='tabler').classes('tabs-bar').props('dense') as tabs:
-            ui.tab('tabler',   label='Tabler Icons')
-            ui.tab('material', label='Material Icons')
+            ui.tab('tabler',   label=t('icons.tab_tabler'))
+            ui.tab('material', label=t('icons.tab_material'))
 
         search = (
-            ui.input(placeholder='Search icons…')
+            ui.input(placeholder=t('icons.search'))
             .props('outlined rounded clearable dense')
             .classes('flex-1')
             .style('max-width:380px; min-width:200px')
         )
         count_lbl = ui.label('').classes('text-xs text-muted self-center')
 
-    # ── Icon grid (single html block, replaced on every render) ──────────────
+    # Icon grid (single html block, replaced on every render)
     grid = ui.html('', sanitize=False).classes('w-full')
 
-    # ── Pagination ────────────────────────────────────────────────────────────
+    # Pagination
     with ui.row().classes('w-full justify-center mt-4'):
         pager = (
             ui.pagination(value=1, min=1, max=1)
@@ -292,10 +294,10 @@ def content() -> None:
             .classes('pagination')
         )
 
-    # ── Keyboard shortcut: / focuses search ───────────────────────────────────
+    # Keyboard shortcut: / focuses search
     ui.keyboard(on_key=lambda e: search.run_method('focus') if e.key == '/' else None)
 
-    # ── Helpers ───────────────────────────────────────────────────────────────
+    # Helpers
     def _filtered() -> list[str]:
         src = _TABLER_ICONS if state['tab'] == 'tabler' else _MATERIAL_ICONS
         q = state['query']
@@ -337,7 +339,7 @@ def content() -> None:
         )
         grid.set_content('<div class="ib-grid-inner">' + ''.join(tiles) + '</div>')
 
-    # ── Event handlers ─────────────────────────────────────────────────────────
+    # Event handlers
     def on_tab(e):
         state['tab'] = e.value
         state['page'] = 1
@@ -356,6 +358,6 @@ def content() -> None:
     search.on_value_change(on_search)
     pager.on_value_change(on_page)
 
-    # ── Initial render ─────────────────────────────────────────────────────────
+
     _render()
 

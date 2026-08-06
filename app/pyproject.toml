@@ -5,8 +5,19 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "nicegui==3.8.0",
-    "nicegui[highcharts]",
+    "nicegui[highcharts]==3.9.0",
     "pyinstaller>=6.13.0",
     "pywebview>=5.4",
+    "sqlalchemy>=2.0",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+

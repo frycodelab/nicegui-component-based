@@ -5,8 +5,9 @@ import base64
 from nicegui import ui
 
 from components.print_component import encode_html, encode_image, encode_page, open_print
+from services.i18n import t
 
-# ── Sample assets generated at module load ─────────────────────────────────────
+# Sample assets generated at module load
 
 # A minimal SVG bar-chart used for the image-print demo (no file dependency)
 _SAMPLE_SVG = """\
@@ -65,35 +66,29 @@ _REPORT_TABLE = """
 """
 
 
-# ── Component ──────────────────────────────────────────────────────────────────
-
 def content() -> None:
 
-    # ── Page header ───────────────────────────────────────────────────────────
     with ui.row().classes('w-full items-start justify-between mb-1'):
         with ui.column().classes('gap-0'):
-            ui.label('Print Demo').classes('page-title')
-            ui.label('Live examples of every print_component mode — click any card to open the print dialog.') \
+            ui.label(t('print_demo.title')).classes('page-title')
+            ui.label(t('print_demo.subtitle')) \
                 .classes('text-sm text-muted')
     ui.element('div').classes('divider mb-4')
 
-    # ── Three mode cards ──────────────────────────────────────────────────────
+    # Three mode cards
     with ui.row().classes('w-full gap-4 flex-wrap items-stretch'):
 
-        # ── Card 1: Raw HTML ──────────────────────────────────────────────────
+        # Card 1: Raw HTML
         with ui.element('div').classes('card flex-1 flex flex-col').style('min-width:260px; max-width:380px'):
             with ui.row().classes('items-center gap-2 mb-1'):
                 ui.icon('code', size='sm').classes('text-primary')
-                ui.label('HTML Print').classes('card-title')
-            ui.label(
-                'Pass any HTML string — headings, paragraphs, lists, tables. '
-                'Great for quick text reports.'
-            ).classes('text-sm text-muted mt-2')
+                ui.label(t('print_demo.html_title')).classes('card-title')
+            ui.label(t('print_demo.html_desc')).classes('text-sm text-muted mt-2')
 
             ui.element('div').style('flex:1')  # aligns separator across cards
             ui.separator().classes('my-4')
 
-            ui.label('Preview').classes('text-xs text-faint font-semi mb-1')
+            ui.label(t('print_demo.preview')).classes('text-xs text-faint font-semi mb-1')
             with ui.element('div').classes('rounded p-3 text-sm').style('background:var(--faint); border:1px solid var(--border)'):
                 ui.html(
                     '<b>Daily Summary</b><br>'
@@ -104,23 +99,20 @@ def content() -> None:
             ui.element('div').style('flex:1')  # pushes button to bottom
             ui.separator().classes('my-4')
 
-            ui.button('Print HTML report', icon='print', on_click=_print_html) \
+            ui.button(t('print_demo.btn_html'), icon='print', on_click=_print_html) \
                 .props('unelevated').classes('btn btn-primary w-full')
 
-        # ── Card 2: Base64 Image ──────────────────────────────────────────────
+        # Card 2: Base64 Image
         with ui.element('div').classes('card flex-1 flex flex-col').style('min-width:260px; max-width:380px'):
             with ui.row().classes('items-center gap-2 mb-1'):
                 ui.icon('image', size='sm').classes('text-primary')
-                ui.label('Image Print').classes('card-title')
-            ui.label(
-                'Pass a plain base64 string (PNG, JPEG, SVG). '
-                'The print view centres it on the page with an optional caption.'
-            ).classes('text-sm text-muted mt-2')
+                ui.label(t('print_demo.image_title')).classes('card-title')
+            ui.label(t('print_demo.image_desc')).classes('text-sm text-muted mt-2')
 
             ui.element('div').style('flex:1')  # aligns separator across cards
             ui.separator().classes('my-4')
 
-            ui.label('Preview').classes('text-xs text-faint font-semi mb-1')
+            ui.label(t('print_demo.preview')).classes('text-xs text-faint font-semi mb-1')
             ui.html(
                 f'<img src="data:image/svg+xml;base64,{_SAMPLE_SVG_B64}" '
                 f'style="width:100%;border-radius:6px;border:1px solid var(--border)">',
@@ -130,23 +122,20 @@ def content() -> None:
             ui.element('div').style('flex:1')  # pushes button to bottom
             ui.separator().classes('my-4')
 
-            ui.button('Print chart image', icon='print', on_click=_print_image) \
+            ui.button(t('print_demo.btn_image'), icon='print', on_click=_print_image) \
                 .props('unelevated').classes('btn btn-primary w-full')
 
-        # ── Card 3: Structured page ───────────────────────────────────────────
+        # Card 3: Structured page
         with ui.element('div').classes('card flex-1 flex flex-col').style('min-width:260px; max-width:380px'):
             with ui.row().classes('items-center gap-2 mb-1'):
                 ui.icon('article', size='sm').classes('text-primary')
-                ui.label('Structured Page').classes('card-title')
-            ui.label(
-                'Combine a title, subtitle, and any mix of HTML and image sections '
-                'into one print-ready document.'
-            ).classes('text-sm text-muted mt-2')
+                ui.label(t('print_demo.page_title')).classes('card-title')
+            ui.label(t('print_demo.page_desc')).classes('text-sm text-muted mt-2')
 
             ui.element('div').style('flex:1')  # aligns separator across cards
             ui.separator().classes('my-4')
 
-            ui.label('Preview').classes('text-xs text-faint font-semi mb-1')
+            ui.label(t('print_demo.preview')).classes('text-xs text-faint font-semi mb-1')
             with ui.element('div').classes('rounded p-3 text-sm').style('background:var(--faint); border:1px solid var(--border); font-family:system-ui'):
                 ui.html(
                     '<div style="font-weight:700;font-size:14px;margin-bottom:2px">Order Report — Feb 2026</div>'
@@ -158,11 +147,11 @@ def content() -> None:
             ui.element('div').style('flex:1')  # pushes button to bottom
             ui.separator().classes('my-4')
 
-            ui.button('Print full report', icon='print', on_click=_print_page) \
+            ui.button(t('print_demo.btn_page'), icon='print', on_click=_print_page) \
                 .props('unelevated').classes('btn btn-primary w-full')
 
 
-# ── Print actions ──────────────────────────────────────────────────────────────
+# Print actions
 
 def _print_html() -> None:
     html = (

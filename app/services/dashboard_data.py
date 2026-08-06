@@ -1,13 +1,11 @@
-"""
-Dashboard data service — generates realistic mock metrics and chart data.
+"""Dashboard data service: mock metrics and chart data.
+
 Swap the return values here for real DB / API calls without touching the UI.
 """
 
 import random
 from datetime import datetime, timedelta
 
-
-# ── KPI cards ────────────────────────────────────────────────────────────────
 
 def get_kpis() -> dict:
     return {
@@ -18,7 +16,6 @@ def get_kpis() -> dict:
     }
 
 
-# ── Revenue line chart — last 30 days ────────────────────────────────────────
 
 def get_revenue_series() -> dict:
     days = [(datetime.today() - timedelta(days=29 - i)).strftime("%d %b") for i in range(30)]
@@ -27,7 +24,6 @@ def get_revenue_series() -> dict:
     return {"days": days, "revenue": revenue, "forecast": forecast}
 
 
-# ── Order status donut ────────────────────────────────────────────────────────
 
 def get_order_status() -> list[dict]:
     shipped    = random.randint(120, 180)
@@ -42,7 +38,6 @@ def get_order_status() -> list[dict]:
     ]
 
 
-# ── Daily orders bar — last 7 days ───────────────────────────────────────────
 
 def get_daily_orders() -> dict:
     days = [(datetime.today() - timedelta(days=6 - i)).strftime("%a") for i in range(7)]
@@ -50,8 +45,6 @@ def get_daily_orders() -> dict:
     returned  = [random.randint(1, 10)  for _ in range(7)]
     return {"days": days, "completed": completed, "returned": returned}
 
-
-# ── Production throughput area — last 24 h ───────────────────────────────────
 
 def get_throughput_series() -> dict:
     hours  = [f"{i:02d}:00" for i in range(24)]

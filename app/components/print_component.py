@@ -1,9 +1,9 @@
-"""Print page — renders HTML snippets, base64 images and structured pages into an
-A4-style print view.  Other components import the encode_* helpers to build the
+"""Print page: renders HTML snippets, base64 images and structured pages into an
+A4-style print view. Other components import the encode_* helpers to build the
 URL token; the /print/{data} route calls content() to decode and display it.
 
-Typical usage from another component
-─────────────────────────────────────
+Typical usage from another component:
+
 from components.print_component import encode_html, encode_image, encode_page, open_print
 
 # Raw HTML
@@ -30,7 +30,7 @@ import json
 
 from nicegui import ui
 
-# ── Print-specific stylesheet (screen preview + @media print) ─────────────────
+# Print-specific stylesheet (screen preview + @media print)
 _PRINT_CSS = """
 <style>
   /* Screen preview wrapper */
@@ -92,7 +92,7 @@ _PRINT_CSS = """
 """
 
 
-# ── Public encoding helpers ────────────────────────────────────────────────────
+# Public encoding helpers
 
 def encode_html(html: str) -> str:
     """Encode a raw HTML fragment for the /print/{data} URL."""
@@ -102,7 +102,7 @@ def encode_html(html: str) -> str:
 def encode_image(b64_data: str, mime: str = "image/png", caption: str = "") -> str:
     """Encode a base64 image for the /print/{data} URL.
 
-    b64_data must be a plain base64 string — no 'data:…;base64,' prefix.
+    b64_data must be a plain base64 string, no 'data:…;base64,' prefix.
     """
     return _encode({"type": "image", "data": b64_data, "mime": mime, "caption": caption})
 
@@ -124,11 +124,11 @@ def encode_page(
 
 
 def open_print(token: str) -> None:
-    """Open /print/{token} in a new browser tab — call after encode_*."""
+    """Open /print/{token} in a new browser tab. Call after encode_*."""
     ui.run_javascript(f"window.open('/print/{token}', '_blank')")
 
 
-# ── Internal helpers ───────────────────────────────────────────────────────────
+# Internal helpers
 
 def _encode(obj: dict) -> str:
     return base64.urlsafe_b64encode(json.dumps(obj).encode()).decode()
@@ -187,7 +187,7 @@ def _build_inner(decoded: dict | str) -> str:
     return f'<div class="pw-section">{decoded.get("html", "")}</div>'
 
 
-# ── Page handler — called by /print/{data} route in main.py ───────────────────
+# Page handler for the /print/{data} route in main.py
 
 def content(data: str) -> None:
     ui.add_head_html(_PRINT_CSS, shared=False)

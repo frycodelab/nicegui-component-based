@@ -1,7 +1,9 @@
 # Use the official NiceGUI image as the base image
 FROM zauberzeug/nicegui:latest
 
-RUN pip install nicegui[highcharts]
+# Upgrade python-engineio and python-socketio to fix KeyError: 'REQUEST_METHOD'
+# under concurrent load (engineio bug with ASGI WebSocket scopes)
+RUN pip install --upgrade python-engineio python-socketio nicegui[highcharts]
 # Set working directory
 WORKDIR /app
 

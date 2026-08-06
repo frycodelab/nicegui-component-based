@@ -6,5 +6,30 @@ dist/
 wheels/
 *.egg-info
 
+# Test / tooling caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Application database (seeded at runtime)
+data/
+*.db
+
+# Application logs (rolling files)
+logs/
+*.log
+
+# Database backups (keep the folder, ignore the dumps)
+backup/*
+!backup/.gitkeep
+
+# TLS certificates (self-signed / private keys — never commit)
+certs/
+*.pem
+*.key
+
 # Virtual environments
 .venv
+
+# NiceGUI
+.nicegui/

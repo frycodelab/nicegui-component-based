@@ -1,18 +1,19 @@
-"""Design System page — live reference for every CSS component and utility token."""
+"""Design System page: live reference for every CSS component and utility token."""
 
 import asyncio
 from nicegui import ui, app
-from services.notifications import notify, notify_ongoing
+from components.notifications import notify, notify_ongoing
+from services.i18n import t
 
 def content() -> None:
 
-    # ── Page header ──────────────────────────────────────────────
-    ui.label('Design System').classes('page-title mb-2')
-    ui.label('Every CSS component & utility token at a glance.').classes('text-sm text-muted mb-4')
+    # Page header
+    ui.label(t('design_system.title')).classes('page-title mb-2')
+    ui.label(t('design_system.subtitle')).classes('text-sm text-muted mb-4')
     ui.element('div').classes('divider')
 
-    # ── 1. TYPOGRAPHY ────────────────────────────────────────────
-    ui.label('1 · Typography').classes('section-title mt-4 mb-2')
+    # 1. Typography
+    ui.label(t('ds.typography')).classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         ui.label('LABEL TEXT (label-text)').classes('label-text mb-3')
         for cls in ['text-xs', 'text-sm', 'text-base', 'text-lg', 'text-xl', 'text-2xl']:
@@ -25,8 +26,8 @@ def content() -> None:
             for cls in ['text-muted', 'text-faint', 'text-success', 'text-warning', 'text-danger', 'text-info']:
                 ui.label(f'.{cls}').classes(cls)
 
-    # ── 2. BUTTONS ───────────────────────────────────────────────
-    ui.label('2 · Buttons').classes('section-title mt-4 mb-2')
+    # 2. Buttons
+    ui.label(t('ds.buttons')).classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         ui.label('VARIANTS').classes('label-text mb-3')
         with ui.row().classes('gap-2 flex-wrap mb-3'):
@@ -44,8 +45,8 @@ def content() -> None:
             ui.button('Disabled Primary', color='white').props('flat no-caps').classes('button button-primary disabled')
             ui.button('Disabled Outline', color='white').props('flat no-caps').classes('button button-outline disabled')
 
-    # ── 3. CARDS & PANELS ────────────────────────────────────────
-    ui.label('3 · Cards & Panels').classes('section-title mt-4 mb-2')
+    # 3. Cards & panels
+    ui.label(t('ds.cards')).classes('section-title mt-4 mb-2')
     with ui.row().classes('gap-4 flex-wrap mb-4'):
         with ui.element('div').classes('card').style('min-width:260px'):
             ui.label('Card Title').classes('card-title')
@@ -58,15 +59,15 @@ def content() -> None:
             ui.label('Panel').classes('section-title mb-1')
             ui.label('Lighter faint-bg panel for secondary info.').classes('text-sm text-muted')
 
-    # ── 4. BADGES ────────────────────────────────────────────────
-    ui.label('4 · Badges').classes('section-title mt-4 mb-2')
+    # 4. Badges
+    ui.label(t('ds.badges')).classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         with ui.row().classes('gap-2 flex-wrap'):
             for variant in ['badge-default', 'badge-primary', 'badge-success', 'badge-warning', 'badge-danger', 'badge-info', 'badge-outline']:
                 ui.label(variant.replace('badge-', '').capitalize()).classes(f'badge {variant}')
 
-    # ── 5. STATUS DOTS ───────────────────────────────────────────
-    ui.label('5 · Status Dots').classes('section-title mt-4 mb-2')
+    # 5. Status dots
+    ui.label(t('ds.status_dots')).classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         with ui.row().classes('gap-4 flex-wrap items-center'):
             for state in ['success', 'warning', 'danger', 'info', 'muted']:
@@ -74,8 +75,8 @@ def content() -> None:
                     ui.element('span').classes(f'status-dot {state}')
                     ui.label(state.capitalize()).classes('text-sm')
 
-    # ── 6. ALERTS ────────────────────────────────────────────────
-    ui.label('6 · Alerts').classes('section-title mt-4 mb-2')
+    # 6. Alerts
+    ui.label(t('ds.alerts')).classes('section-title mt-4 mb-2')
     with ui.column().classes('gap-2 w-full mb-4'):
         ui.label('Default alert — informational neutral message.').classes('alert')
         ui.label('Success — Operation completed successfully.').classes('alert alert-success')
@@ -83,8 +84,8 @@ def content() -> None:
         ui.label('Danger — An error occurred, action required.').classes('alert alert-danger')
         ui.label('Info — Here is something you should know.').classes('alert alert-info')
 
-    # ── 7. NOTIFICATIONS ─────────────────────────────────────────
-    ui.label('7 · Notifications').classes('section-title mt-4 mb-2')
+    # 7. Notifications
+    ui.label(t('ds.notifications')).classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         ui.label('TYPES').classes('label-text mb-3')
         with ui.row().classes('gap-2 flex-wrap mb-3'):
@@ -105,8 +106,8 @@ def content() -> None:
                 ui.button(pos, color='white', on_click=lambda p=pos: notify(f'Position: {p}', type='info', position=p)).props('flat no-caps').classes('button button-outline button-sm')
         ui.element('div').classes('divider')
 
-    # ── 8. INPUTS ────────────────────────────────────────────────
-    ui.label('8 · Inputs').classes('section-title mt-4 mb-2')
+    # 8. Inputs
+    ui.label(t('ds.inputs')).classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         ui.label('DEFAULT').classes('label-text mb-3')
         with ui.column().classes('gap-3 w-full'):
@@ -125,8 +126,8 @@ def content() -> None:
                 ui.input(value='bad@value', placeholder='Error…').classes('w-full input-error').props('outlined')
                 ui.label('This field is required.').classes('field-error')
 
-    # ── 9. INPUT GROUPS ──────────────────────────────────────────
-    ui.label('9 · Input Groups').classes('section-title mt-4 mb-2')
+    # 9. Input groups
+    ui.label(t('ds.input_groups')).classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         with ui.column().classes('gap-3 w-full'):
             ui.label('ICON PREFIX').classes('label-text mb-1')
@@ -142,8 +143,8 @@ def content() -> None:
                 amount.add_slot('prepend', '<span style="padding:0 8px;color:var(--muted-fg);font-size:0.9rem">€</span>')
                 amount.add_slot('append',  '<span style="padding:0 8px;color:var(--muted-fg);font-size:0.9rem">EUR</span>')
 
-    # ── 10. SELECT ────────────────────────────────────────────────
-    ui.label('10 · Select').classes('section-title mt-4 mb-2')
+    # 10. Select
+    ui.label(t('ds.select')).classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         with ui.column().classes('gap-3 w-full'):
             ui.label('SINGLE SELECT').classes('label-text mb-1')
@@ -151,8 +152,8 @@ def content() -> None:
             ui.label('MULTI SELECT').classes('label-text mb-1')
             ui.select(['Red', 'Green', 'Blue', 'Yellow'], multiple=True, value=['Red', 'Blue']).classes('w-full').props('outlined use-chips')
 
-    # ── 11. PROGRESS ─────────────────────────────────────────────
-    ui.label('11 · Progress').classes('section-title mt-4 mb-2')
+    # 11. Progress
+    ui.label(t('ds.progress')).classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         ui.label('LINEAR').classes('label-text mb-3')
         with ui.column().classes('gap-3 w-full mb-3'):
@@ -179,8 +180,8 @@ def content() -> None:
             ui.circular_progress(value=30,  min=0, max=100, show_value=True).props('color=negative size=64px track-color=grey-3')
             ui.circular_progress(value=100, min=0, max=100, show_value=True).props('indeterminate color=primary size=64px track-color=grey-3')
 
-    # ── 12. DIALOG ───────────────────────────────────────────────
-    ui.label('12 · Dialog').classes('section-title mt-4 mb-2')
+    # 12. Dialog
+    ui.label(t('ds.dialog')).classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         with ui.row().classes('gap-2 flex-wrap'):
             with ui.dialog() as info_dialog, ui.card().classes('dialog-card'):
@@ -199,8 +200,8 @@ def content() -> None:
                     ui.button('Delete', on_click=danger_dialog.close, color='white').props('flat no-caps').classes('button button-danger button-sm')
             ui.button('Danger Dialog', on_click=danger_dialog.open, color='white').props('flat no-caps').classes('button button-danger')
 
-    # ── 13. TOOLTIP / POPOVER ────────────────────────────────────
-    ui.label('13 · Tooltip & Popover').classes('section-title mt-4 mb-2')
+    # 13. Tooltip / popover
+    ui.label(t('ds.tooltip')).classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         ui.label('TOOLTIPS').classes('label-text mb-3')
         with ui.row().classes('gap-3 flex-wrap mb-4'):
@@ -222,8 +223,8 @@ def content() -> None:
                 with ui.menu_item('Delete', on_click=lambda: notify('Item deleted', type='negative')):
                     ui.icon('delete').classes('account-icon text-danger')
 
-    # ── 14. TOGGLES, CHECKBOXES, RADIO ───────────────────────────
-    ui.label('14 · Toggles, Checkboxes & Radio').classes('section-title mt-4 mb-2')
+    # 14. Toggles, checkboxes, radio
+    ui.label(t('ds.toggles')).classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         with ui.row().classes('gap-8 flex-wrap'):
             with ui.column().classes('gap-2'):
@@ -240,8 +241,8 @@ def content() -> None:
                 ui.label('RADIO').classes('label-text mb-1')
                 ui.radio(['Option A', 'Option B', 'Option C'], value='Option A')
 
-    # ── 15. TABS ─────────────────────────────────────────────────
-    ui.label('15 · Tabs').classes('section-title mt-4 mb-2')
+    # 15. Tabs
+    ui.label(t('ds.tabs')).classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         with ui.tabs().classes('tabs-bar') as tabs:
             tab_overview  = ui.tab('Overview',  icon='dashboard')
@@ -255,7 +256,7 @@ def content() -> None:
             with ui.tab_panel(tab_settings):
                 ui.label('Settings panel — configuration options here.').classes('text-sm text-muted')
 
-    # ── 16. DATA TABLE ───────────────────────────────────────────
+    # 16. Data table
     ui.label('16 · Data Table').classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         rows = [
@@ -282,7 +283,7 @@ def content() -> None:
                         with ui.element('td'):
                             ui.label(row['amount'])
 
-    # ── 17. TEXTAREA ─────────────────────────────────────────────
+    # 17. Textarea
     ui.label('17 · Textarea').classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         with ui.column().classes('gap-3 w-full'):
@@ -296,7 +297,7 @@ def content() -> None:
                 ui.label('Auto-grow').classes('field-label')
                 ui.textarea(placeholder='Grows as you type…').classes('w-full').props('outlined autogrow')
 
-    # ── 18. DATE & TIME PICKERS ──────────────────────────────────
+    # 18. Date & time pickers
     ui.label('18 · Date & Time Pickers').classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         with ui.row().classes('gap-6 flex-wrap'):
@@ -307,7 +308,7 @@ def content() -> None:
                 ui.label('TIME').classes('label-text mb-1')
                 ui.time(value='09:30').classes('picker-card')
 
-    # ── 19. SLIDERS ──────────────────────────────────────────────
+    # 19. Sliders
     ui.label('19 · Sliders').classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         with ui.column().classes('gap-5 w-full'):
@@ -321,7 +322,7 @@ def content() -> None:
                 ui.label('Range slider').classes('field-label mb-2')
                 ui.range(min=0, max=100, value={'min': 20, 'max': 75}).classes('w-full').props('label')
 
-    # ── 20. NUMBER INPUT ─────────────────────────────────────────
+    # 20. Number input
     ui.label('20 · Number Input').classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         with ui.row().classes('gap-4 flex-wrap'):
@@ -335,7 +336,7 @@ def content() -> None:
                 ui.label('Disabled').classes('field-label')
                 ui.number(value=100).classes('w-full').props('outlined disable')
 
-    # ── 21. FILE UPLOAD ──────────────────────────────────────────
+    # 21. File upload
     ui.label('21 · File Upload').classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         ui.upload(label='Drop files here or click to browse',
@@ -343,7 +344,7 @@ def content() -> None:
                   on_rejected=lambda: notify('File rejected — check type or size.', type='negative', title='Upload failed'),
                   max_file_size=5_000_000).classes('w-full upload-area').props('flat bordered accept=".pdf,.png,.jpg,.xlsx"')
 
-    # ── 22. ACCORDION / EXPANSION ────────────────────────────────
+    # 22. Accordion / expansion
     ui.label('22 · Accordion').classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4 p-0'):
         with ui.expansion('What is this design system?', icon='help_outline').classes('accordion-item'):
@@ -355,7 +356,7 @@ def content() -> None:
         with ui.expansion('Can I customize colors?', icon='palette').classes('accordion-item'):
             ui.label('Yes — edit the CSS variables in :root inside global-css.css. All components reference the same tokens.').classes('text-sm text-muted')
 
-    # ── 23. STEPPER / WIZARD ─────────────────────────────────────
+    # 23. Stepper / wizard
     ui.label('23 · Stepper').classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         with ui.stepper(value='Details').props('vertical').classes('w-full stepper') as stepper:
@@ -374,7 +375,7 @@ def content() -> None:
                     ui.button('Back', color='white', on_click=stepper.previous).props('flat no-caps').classes('button button-outline button-sm')
                     ui.button('Submit', color='white', on_click=lambda: notify('Order submitted!', type='positive', title='Success')).props('flat no-caps').classes('button button-primary button-sm')
 
-    # ── 24. AVATAR & CHIPS ───────────────────────────────────────
+    # 24. Avatar & chips
     ui.label('24 · Avatar & Chips').classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         ui.label('AVATAR').classes('label-text mb-3')
@@ -403,7 +404,7 @@ def content() -> None:
                 ui.icon('local_shipping').style('font-size:14px;margin-right:4px')
                 ui.label('Shipped')
 
-    # ── 26. SKELETON ─────────────────────────────────────────────
+    # 26. Skeleton
     ui.label('26 · Skeleton / Loading').classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         with ui.column().classes('gap-3 w-full'):
@@ -421,7 +422,7 @@ def content() -> None:
                     ui.element('div').classes('skeleton skeleton-text').style('width:80%')
             ui.element('div').classes('skeleton skeleton-rect mt-2')
 
-    # ── 27. SPLITTER ─────────────────────────────────────────────
+    # 27. Splitter
     ui.label('27 · Splitter').classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         with ui.splitter(value=40).classes('w-full splitter-wrap').style('height:120px') as splitter:
@@ -432,7 +433,7 @@ def content() -> None:
                 ui.label('Right pane').classes('section-title p-4')
                 ui.label('Both sides are scrollable.').classes('text-sm text-muted px-4')
 
-    # ── 28. CODE DISPLAY ─────────────────────────────────────────
+    # 28. Code display
     ui.label('28 · Code Display').classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         ui.code('''from nicegui import ui
@@ -442,7 +443,7 @@ def content() -> None:
     ui.notify("Done!", type="positive")
 ''').classes('w-full code-block')
 
-    # ── 29. TIMELINE ─────────────────────────────────────────────
+    # 29. Timeline
     ui.label('29 · Timeline').classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         with ui.timeline(side='right'):
@@ -457,7 +458,7 @@ def content() -> None:
             ui.timeline_entry('Awaiting delivery to customer address.',
                               title='In Transit', subtitle='Pending', icon='pending', color='negative')
 
-    # ── 30. BREADCRUMBS & PAGINATION ─────────────────────────────
+    # 30. Breadcrumbs & pagination
     ui.label('30 · Breadcrumbs & Pagination').classes('section-title mt-4 mb-2')
     with ui.element('div').classes('card mb-4'):
         ui.label('BREADCRUMBS').classes('label-text mb-3')

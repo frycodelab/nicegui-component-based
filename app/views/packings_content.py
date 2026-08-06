@@ -1,7 +1,8 @@
 """Packings page — Kanban board (Pending → In Progress → Packed) with pipeline summary."""
 
 from nicegui import ui
-from services.notifications import notify
+from components.notifications import notify
+from services.i18n import t
 
 _COLUMNS = {
     'Pending': [
@@ -30,25 +31,30 @@ _COL_STYLE = {
     'Packed':      ('badge-success', 'text-success', 'check_circle', '#4ade80'),
 }
 
+_COL_KEY = {
+    'Pending':     'packing.col.pending',
+    'In Progress': 'packing.col.in_progress',
+    'Packed':      'packing.col.packed',
+}
+
 _COL_ACTION = {
-    'Pending':     ('Start',       'button-outline',  'info',     'Started'),
-    'In Progress': ('Mark Packed', 'button-success',  'positive', 'Packed'),
-    'Packed':      ('Dispatch',    'button-primary',  'positive', 'Dispatched'),
+    'Pending':     ('packing.action.start',       'button-outline',  'info',     'packing.status.started',     'packing.notify.started'),
+    'In Progress': ('packing.action.mark_packed', 'button-success',  'positive', 'packing.status.packed',      'packing.notify.packed'),
+    'Packed':      ('packing.action.dispatch',    'button-primary',  'positive', 'packing.status.dispatched',  'packing.notify.dispatched'),
 }
 
 
 def content() -> None:
 
-    # ── Page header ───────────────────────────────────────────────
     with ui.row().classes('w-full items-start justify-between mt-4 mb-2'):
         with ui.column().classes('gap-1'):
-            ui.label('Packings').classes('page-title')
-            ui.label('Manage packing jobs across all stages.').classes('text-sm text-muted')
-        ui.button('+ New Job', color='white',
-                  on_click=lambda: notify('New job form coming soon', type='info')).props('flat no-caps').classes('button button-primary')
+            ui.label(t('packing.title')).classes('page-title')
+            ui.label(t('packing.subtitle')).classes('text-sm text-muted')
+        ui.button(t('packing.add'), color='white',
+                  on_click=lambda: notify(t('packing.job_soon'), type='info')).props('flat no-caps').classes('button button-primary')
     ui.element('div').classes('divider mb-4')
 
-    # ── Pipeline summary strip ────────────────────────────────────
+    # Pipeline summary
     total       = sum(len(v) for v in _COLUMNS.values())
     total_units = sum(j['units'] for jobs in _COLUMNS.values() for j in jobs)
 
@@ -57,9 +63,9 @@ def content() -> None:
         # Left summary
         with ui.element('div').style(
                 'flex:1;min-width:160px;padding:18px 24px;border-right:1px solid var(--border)'):
-            ui.label('TOTAL JOBS').classes('label-text mb-1')
+            ui.label(t('packing.total_jobs')).classes('label-text mb-1')
             ui.label(str(total)).classes('text-2xl font-bold text-info')
-            ui.label(f'{total_units} units to pack').classes('text-xs text-muted mt-1')
+            ui.label(t('packing.units_to_pack').format(n=total_units)).classes('text-xs text-muted mt-1')
 
         # Pipeline stages
         for col_name in ('Pending', 'In Progress', 'Packed'):
@@ -72,15 +78,15 @@ def content() -> None:
                     f'{"" if is_last else "border-right:1px solid var(--border)"}'):
                 with ui.row().classes('items-center gap-2 mb-1'):
                     ui.icon(col_icon).style(f'font-size:1rem;color:{col_color}')
-                    ui.label(col_name).classes('label-text')
+                    ui.label(t(_COL_KEY[col_name])).classes('label-text')
                 ui.label(str(cnt)).classes(f'text-2xl font-bold {text_cls}')
-                ui.label(f'{pct} % of jobs').classes('text-xs text-muted mt-1')
+                ui.label(t('packing.pct_of_jobs').format(n=pct)).classes('text-xs text-muted mt-1')
 
-    # ── Kanban board ──────────────────────────────────────────────
+    # Kanban board
     with ui.row().classes('gap-4 items-start w-full'):
         for col_name, jobs in _COLUMNS.items():
             badge_cls, text_cls, col_icon, col_color = _COL_STYLE[col_name]
-            action_label, action_cls, action_type, action_title = _COL_ACTION[col_name]
+            action_label_key, action_cls, action_type, action_title_key, action_notify_key = _COL_ACTION[col_name]
 
             with ui.element('div').style(
                     f'flex:1;min-width:260px;padding:14px;border-radius:var(--radius-lg);'
@@ -91,7 +97,7 @@ def content() -> None:
                         f'padding-bottom:12px;border-bottom:2px solid {col_color}'):
                     with ui.row().classes('items-center gap-2'):
                         ui.icon(col_icon).style(f'font-size:1.1rem;color:{col_color}')
-                        ui.label(col_name).classes('font-semi text-base')
+                        ui.label(t(_COL_KEY[col_name])).classes('font-semi text-base')
                     ui.label(str(len(jobs))).classes(f'badge {badge_cls}')
 
                 # Job cards
@@ -104,7 +110,7 @@ def content() -> None:
                                 ui.label(job['id']).classes('font-semi text-sm')
                                 with ui.row().classes('items-center gap-1'):
                                     ui.icon('event').style('font-size:12px;color:var(--faint-fg)')
-                                    ui.label(f'Due {job["due"]}').classes('text-xs text-faint')
+                                    ui.label(t('packing.due').format(date=job["due"])).classes('text-xs text-faint')
 
                             # Product + customer
                             ui.label(job['product']).classes('text-sm font-medium mb-1')
@@ -117,13 +123,13 @@ def content() -> None:
                                     ui.label(job['pack_type'])
                                 with ui.element('span').classes('chip'):
                                     ui.icon('numbers').style('font-size:11px;margin-right:3px')
-                                    ui.label(f'{job["units"]} units')
+                                    ui.label(t('packing.units').format(n=job["units"]))
 
                             # Footer: order ref + action
                             ui.element('div').classes('divider mt-0 mb-2')
                             with ui.row().classes('items-center justify-between'):
                                 ui.label(job['order']).classes('text-xs text-faint')
-                                ui.button(action_label, color='white',
-                                          on_click=lambda jid=job['id'], t=action_type, ti=action_title:
-                                          notify(f'{jid} — {ti.lower()}', type=t, title=ti),
+                                ui.button(t(action_label_key), color='white',
+                                          on_click=lambda jid=job['id'], at=action_type, nk=action_notify_key, tk=action_title_key:
+                                          notify(t(nk).format(id=jid), type=at, title=t(tk)),
                                           ).props('flat no-caps').classes(f'button {action_cls} button-sm')

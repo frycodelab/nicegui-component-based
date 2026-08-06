@@ -1,7 +1,8 @@
-"""Production page — live line status, KPI summary and hourly throughput chart."""
+"""Production page: live line status, KPI summary and hourly throughput chart."""
 
 from nicegui import ui
-from services.notifications import notify
+from components.notifications import notify
+from services.i18n import t
 
 _LINES = [
     {'name': 'Line A', 'product': 'Gear Box',     'shift': 'Morning',   'target': 500, 'actual': 487, 'status': 'Running', 'status_cls': 'badge-success'},
@@ -23,19 +24,22 @@ _AX = {'axisLine': {'lineStyle': {'color': '#e4e4e7'}}, 'axisTick': {'show': Fal
        'axisLabel': {'color': '#71717a', 'fontSize': 11}}
 _SL = {'splitLine': {'lineStyle': {'color': '#f4f4f5', 'type': 'dashed'}}}
 
+_STATUS_KEY = {'Running': 'status.running', 'Paused': 'status.paused', 'Error': 'status.error'}
+_SHIFT_KEY = {'Morning': 'production.shift.morning', 'Afternoon': 'production.shift.afternoon', 'Night': 'production.shift.night'}
+
 
 def content(searchFilter=None) -> None:
 
-    # ── Page header ───────────────────────────────────────────────
+    # Page header
     with ui.row().classes('w-full items-start justify-between mt-4 mb-2'):
         with ui.column().classes('gap-1'):
-            ui.label('Production').classes('page-title')
-            ui.label('Monitor line status, work orders and throughput.').classes('text-sm text-muted')
-        ui.button('+ New Work Order', color='white',
-                  on_click=lambda: notify('Work order form coming soon', type='info')).props('flat no-caps').classes('button button-primary')
+            ui.label(t('production.title')).classes('page-title')
+            ui.label(t('production.subtitle')).classes('text-sm text-muted')
+        ui.button(t('production.add'), color='white',
+                  on_click=lambda: notify(t('production.wo_soon'), type='info')).props('flat no-caps').classes('button button-primary')
     ui.element('div').classes('divider mb-4')
 
-    # ── KPI row ───────────────────────────────────────────────────
+    # KPI row
     running = sum(1 for l in _LINES if l['status'] == 'Running')
     total_t = sum(l['target'] for l in _LINES)
     total_a = sum(l['actual'] for l in _LINES)
@@ -44,11 +48,11 @@ def content(searchFilter=None) -> None:
 
     with ui.row().classes('gap-4 flex-wrap mb-6'):
         for label, value, sub, color, icon in [
-            ('Active Lines', f'{running} / {len(_LINES)}', 'currently running',          'text-success',                               'conveyor_belt'),
-            ('Units Today',  f'{total_a:,}',               f'of {total_t:,} target',     'text-info',                                  'inventory_2'),
-            ('Efficiency',   f'{eff} %',                   'vs daily target',            'text-success' if eff >= 90 else 'text-warning','speed'),
-            ('Shifts',       '3',                          'Morning / Afternoon / Night', 'text-info',                                  'schedule'),
-            ('Alerts',       str(alerts),                  'lines in error state',        'text-danger' if alerts else 'text-muted',    'warning'),
+            (t('production.kpi.active_lines'), f'{running} / {len(_LINES)}', t('production.sub.running'),                        'text-success',                               'conveyor_belt'),
+            (t('production.kpi.units_today'),  f'{total_a:,}',               t('production.sub.of_target').format(n=f'{total_t:,}'), 'text-info',                                  'inventory_2'),
+            (t('production.kpi.efficiency'),   f'{eff} %',                   t('production.sub.vs_target'),                     'text-success' if eff >= 90 else 'text-warning','speed'),
+            (t('production.kpi.shifts'),       '3',                          t('production.sub.shifts'),                        'text-info',                                  'schedule'),
+            (t('production.kpi.alerts'),       str(alerts),                  t('production.sub.errors'),                        'text-danger' if alerts else 'text-muted',    'warning'),
         ]:
             with ui.element('div').classes('card').style('min-width:150px;flex:1'):
                 with ui.row().classes('items-start justify-between mb-3'):
@@ -57,18 +61,18 @@ def content(searchFilter=None) -> None:
                 ui.label(value).classes(f'text-2xl font-bold {color}')
                 ui.label(sub).classes('text-xs text-muted mt-1')
 
-    # ── Line status table ─────────────────────────────────────────
+    # Line status table
     with ui.element('div').classes('card mb-6'):
         with ui.row().classes('items-center justify-between mb-4'):
             with ui.column().classes('gap-0'):
-                ui.label('Line Status').classes('card-title')
-                ui.label(f'{len(_LINES)} production lines').classes('text-xs text-muted mt-1')
-            ui.button('Refresh', color='white',
-                      on_click=lambda: notify('Line data refreshed', type='info')).props('flat no-caps').classes('button button-ghost button-sm')
+                ui.label(t('production.line_status')).classes('card-title')
+                ui.label(t('production.lines_count').format(n=len(_LINES))).classes('text-xs text-muted mt-1')
+            ui.button(t('common.refresh'), color='white',
+                      on_click=lambda: notify(t('production.refreshed'), type='info')).props('flat no-caps').classes('button button-ghost button-sm')
         with ui.element('table').classes('data-table w-full'):
             with ui.element('thead'):
                 with ui.element('tr'):
-                    for col in ['Line', 'Product', 'Shift', 'Progress', 'Actual / Target', 'Status']:
+                    for col in [t('production.col.line'), t('common.product'), t('production.col.shift'), t('production.col.progress'), t('production.col.actual_target'), t('common.status')]:
                         with ui.element('th'): ui.label(col)
             with ui.element('tbody'):
                 for line in _LINES:
@@ -78,7 +82,7 @@ def content(searchFilter=None) -> None:
                         with ui.element('td'):
                             ui.label(line['name']).classes('font-semi')
                         with ui.element('td'): ui.label(line['product'])
-                        with ui.element('td'): ui.label(line['shift'])
+                        with ui.element('td'): ui.label(t(_SHIFT_KEY[line['shift']]))
                         with ui.element('td').style('min-width:160px'):
                             ui.element('div').style(
                                 f'height:6px;border-radius:9999px;background:#f4f4f5;overflow:hidden'
@@ -89,14 +93,14 @@ def content(searchFilter=None) -> None:
                             ui.label(f'{line["actual"]:,} / {line["target"]:,}').classes('text-sm')
                             ui.label(f'{pct} %').classes('text-xs text-muted')
                         with ui.element('td'):
-                            ui.label(line['status']).classes(f'badge {line["status_cls"]}')
+                            ui.label(t(_STATUS_KEY[line['status']])).classes(f'badge {line["status_cls"]}')
 
-    # ── Throughput chart ──────────────────────────────────────────
+    # Throughput chart
     with ui.element('div').classes('card mb-4').style('padding:20px 20px 12px 20px'):
         with ui.row().classes('items-start justify-between mb-1'):
             with ui.column().classes('gap-0'):
-                ui.label('Throughput Today').classes('card-title')
-                ui.label('Units per hour — running lines only').classes('text-xs text-muted mt-1')
+                ui.label(t('production.throughput_today')).classes('card-title')
+                ui.label(t('production.units_per_hour')).classes('text-xs text-muted mt-1')
         ui.echart({
             'tooltip': {'trigger': 'axis', **_TT,
                         'axisPointer': {'type': 'cross', 'label': {'backgroundColor': '#60a5fa'}}},
