@@ -1,0 +1,12 @@
+[tools]
+python = "3.12"
+uv = "latest"
+
+[settings]
+# Automatically activates the .venv created by uv when you enter the directory
+python.uv_venv_auto = "create|source"
+
+[deps]
+# Tells mise to ensure uv is ready before managing python environments
+uv = {}
+
